@@ -3,7 +3,12 @@ export interface Position {
   x: number;
   y: number;
 }
-export type Cargo = { [key: string]: number }[];
+interface Cargos {
+  id: number;
+  x: number;
+  y: number;
+}
+export type Cargo = Cargos[];
 // Cargo 和 Wall 计算属性
 const STEP = 32;
 export function usePosition(pos: Position) {
@@ -25,4 +30,13 @@ export function useCargoPlayer(player: Position, cargo: any) {
   });
 
   return res;
+}
+
+export function useMoveCargos(pos: Position, cargos: Cargo) {
+  for (const data of cargos) {
+    if (data.x === pos.x && data.y === pos.y) {
+      return data.id;
+    }
+  }
+  return null;
 }

@@ -16,6 +16,7 @@ export const usePlayerStore = defineStore("player", () => {
 
     if (useCargoPlayer({ x: player.x - 1, y: player.y }, getCargoPosition())) {
       moveCargoToLeft({ x: player.x - 1, y: player.y });
+      player.x -= 1;
       return;
     }
     player.x -= 1;

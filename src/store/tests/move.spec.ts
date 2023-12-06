@@ -13,14 +13,12 @@ describe("map", () => {
     const newPosition = { x: 1, y: 1 };
     setupPlayer(newPosition);
     setupCargos([
-      { x: 1, y: 1 },
-      { x: 2, y: 2 },
+      { id: 1, x: 1, y: 1 },
+      { id: 2, x: 2, y: 2 },
     ]);
 
     expect(useCargoPlayer(getPlayerPosition(), getCargoPosition())).toEqual(
       true
     );
   });
-
-  it("should player move to cargo", () => {});
 });
