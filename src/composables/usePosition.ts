@@ -37,3 +37,24 @@ export function useMoveCargos(pos: Position, cargos: Cargo) {
   }
   return null;
 }
+
+export enum Direction {
+  LEFT = "left",
+  RIGHT = "right",
+  TOP = "top",
+  DOWN = "down",
+}
+export function useNewPosition(pos: Position, direction: string): Position {
+  switch (direction) {
+    case Direction.LEFT:
+      return { x: pos.x - 1, y: pos.y };
+    case Direction.RIGHT:
+      return { x: pos.x + 1, y: pos.y };
+    case Direction.TOP:
+      return { x: pos.x, y: pos.y - 1 };
+    case Direction.DOWN:
+      return { x: pos.x, y: pos.y + 1 };
+    default:
+      return pos;
+  }
+}

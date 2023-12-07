@@ -17,11 +17,18 @@ export const useCargoStore = defineStore("cargo", () => {
   }
 
   function moveCargoToLeft(pos: Position) {
-    return useCargosPosition(pos, cargos);
+    return useCargosPosition(pos, cargos, "left");
   }
-  function moveCargoToRight() {}
-  function moveCargoToTop() {}
-  function moveCargoToDown() {}
+
+  function moveCargoToRight(pos: Position) {
+    return useCargosPosition(pos, cargos, "right");
+  }
+  function moveCargoToTop(pos: Position) {
+    return useCargosPosition(pos, cargos, "top");
+  }
+  function moveCargoToDown(pos: Position) {
+    return useCargosPosition(pos, cargos, "down");
+  }
 
   return {
     cargos,

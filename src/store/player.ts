@@ -6,7 +6,13 @@ import { useMapStore } from "./map";
 
 export const usePlayerStore = defineStore("player", () => {
   const { isWall } = useMapStore();
-  const { getCargoPosition, moveCargoToLeft } = useCargoStore();
+  const {
+    getCargoPosition,
+    moveCargoToLeft,
+    moveCargoToRight,
+    moveCargoToDown,
+    moveCargoToTop,
+  } = useCargoStore();
   const player = reactive({
     x: 1,
     y: 1,
@@ -16,7 +22,6 @@ export const usePlayerStore = defineStore("player", () => {
     if (isWall({ x: player.x - 1, y: player.y })) return;
 
     if (useCargoPlayer({ x: player.x - 1, y: player.y }, getCargoPosition())) {
-      // moveCargoToLeft({ x: player.x - 1, y: player.y });
       if (!moveCargoToLeft({ x: player.x - 1, y: player.y })) return;
       player.x -= 1;
       return;
@@ -26,16 +31,20 @@ export const usePlayerStore = defineStore("player", () => {
 
   function movePlayerToRight() {
     if (isWall({ x: player.x + 1, y: player.y })) return;
-
     if (useCargoPlayer({ x: player.x + 1, y: player.y }, getCargoPosition())) {
+      if (!moveCargoToRight({ x: player.x + 1, y: player.y })) return;
+      player.x += 1;
       return;
     }
+
     player.x += 1;
   }
 
   function movePlayerToDown() {
     if (isWall({ x: player.x, y: player.y + 1 })) return;
     if (useCargoPlayer({ x: player.x, y: player.y + 1 }, getCargoPosition())) {
+      if (!moveCargoToDown({ x: player.x, y: player.y + 1 })) return;
+      player.y += 1;
       return;
     }
     player.y += 1;
@@ -44,6 +53,8 @@ export const usePlayerStore = defineStore("player", () => {
   function movePlayerToUp() {
     if (isWall({ x: player.x, y: player.y - 1 })) return;
     if (useCargoPlayer({ x: player.x, y: player.y - 1 }, getCargoPosition())) {
+      if (!moveCargoToTop({ x: player.x, y: player.y - 1 })) return;
+      player.y -= 1;
       return;
     }
     player.y -= 1;
