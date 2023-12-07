@@ -24,7 +24,10 @@ export const useMapStore = defineStore("map", () => {
     return map[position.x][position.y] == MapTile.WALL;
   }
 
-  function isCargos() {}
-
+  function isCargos(start: Position, cargos: any) {
+    return cargos.some((item: any) => {
+      return item.x === start.x && item.y === start.y;
+    });
+  }
   return { map, setupMap, isWall, isCargos };
 });

@@ -16,10 +16,12 @@ describe("cargo", () => {
     const { getCargoPosition } = useCargoStore();
     expect(getCargoPosition()).toEqual([
       {
+        id: 1,
         x: 1,
         y: 1,
       },
       {
+        id: 2,
         x: 2,
         y: 2,
       },

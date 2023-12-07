@@ -10,7 +10,7 @@ export const useCargoStore = defineStore("cargo", () => {
     { id: 2, x: 3, y: 3 },
   ]);
 
-  function setupCargos(newCargos: Cargo[]) {
+  function setupCargos(newCargos: Cargo) {
     cargos.splice(0, cargos.length, ...newCargos);
   }
 
@@ -24,6 +24,9 @@ export const useCargoStore = defineStore("cargo", () => {
     cargos.find((item) => {
       if (item.id === id) {
         if (isWall({ x: item.x - 1, y: item.y })) {
+          return (res = false);
+        }
+        if (isCargos({ x: item.x - 1, y: item.y }, cargos)) {
           return (res = false);
         }
         item.x -= 1;

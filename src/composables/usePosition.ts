@@ -9,6 +9,7 @@ interface Cargos {
   y: number;
 }
 export type Cargo = Cargos[];
+
 // Cargo 和 Wall 计算属性
 const STEP = 32;
 export function usePosition(pos: Position) {
@@ -22,14 +23,14 @@ export function usePosition(pos: Position) {
 }
 
 export function useCargoPlayer(player: Position, cargo: any) {
-  const x = player.x;
-  const y = player.y;
+  // const x = player.x;
+  // const y = player.y;
 
-  const res = cargo.some((item: any) => {
-    return item.x * STEP === x * STEP && item.y * STEP === y * STEP;
+  return cargo.some((item: any) => {
+    return (
+      item.x * STEP === player.x * STEP && item.y * STEP === player.y * STEP
+    );
   });
-
-  return res;
 }
 
 export function useMoveCargos(pos: Position, cargos: Cargo) {
