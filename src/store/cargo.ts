@@ -18,18 +18,18 @@ export const useCargoStore = defineStore("cargo", () => {
     return cargos;
   }
 
-  function moveCargoToLeft(pos: Position): boolean {
-    // if (isWall()) return;
+  function moveCargoToLeft(pos: Position) {
     const id = useMoveCargos(pos, cargos);
+    let res = true;
     cargos.find((item) => {
       if (item.id === id) {
         if (isWall({ x: item.x - 1, y: item.y })) {
-          return;
+          return (res = false);
         }
-
         item.x -= 1;
       }
     });
+    return res;
   }
   function moveCargoToRight() {}
   function moveCargoToTop() {}
