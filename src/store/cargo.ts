@@ -1,10 +1,8 @@
 import { defineStore } from "pinia";
-import { useMapStore } from "./map";
-import { Cargo, Position, useMoveCargos } from "../composables/usePosition";
+import { Cargo, Position } from "../composables/usePosition";
 import { reactive } from "vue";
+import { useCargosPosition } from "../composables/useCargos";
 export const useCargoStore = defineStore("cargo", () => {
-  const { isWall, isCargos } = useMapStore();
-
   const cargos: Cargo = reactive([
     { id: 1, x: 2, y: 2 },
     { id: 2, x: 3, y: 3 },
@@ -19,20 +17,7 @@ export const useCargoStore = defineStore("cargo", () => {
   }
 
   function moveCargoToLeft(pos: Position) {
-    const id = useMoveCargos(pos, cargos);
-    let res = true;
-    cargos.find((item) => {
-      if (item.id === id) {
-        if (isWall({ x: item.x - 1, y: item.y })) {
-          return (res = false);
-        }
-        if (isCargos({ x: item.x - 1, y: item.y }, cargos)) {
-          return (res = false);
-        }
-        item.x -= 1;
-      }
-    });
-    return res;
+    return useCargosPosition(pos, cargos);
   }
   function moveCargoToRight() {}
   function moveCargoToTop() {}

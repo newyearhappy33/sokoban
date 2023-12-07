@@ -10,7 +10,6 @@ interface Cargos {
 }
 export type Cargo = Cargos[];
 
-// Cargo 和 Wall 计算属性
 const STEP = 32;
 export function usePosition(pos: Position) {
   const position = computed(() => {
@@ -23,9 +22,6 @@ export function usePosition(pos: Position) {
 }
 
 export function useCargoPlayer(player: Position, cargo: any) {
-  // const x = player.x;
-  // const y = player.y;
-
   return cargo.some((item: any) => {
     return (
       item.x * STEP === player.x * STEP && item.y * STEP === player.y * STEP
