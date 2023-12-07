@@ -3,7 +3,7 @@ import { useMapStore } from "./map";
 import { Cargo, Position, useMoveCargos } from "../composables/usePosition";
 import { reactive } from "vue";
 export const useCargoStore = defineStore("cargo", () => {
-  const { isWall } = useMapStore();
+  const { isWall, isCargos } = useMapStore();
 
   const cargos: Cargo = reactive([
     { id: 1, x: 2, y: 2 },
@@ -18,11 +18,15 @@ export const useCargoStore = defineStore("cargo", () => {
     return cargos;
   }
 
-  function moveCargoToLeft(pos: Position) {
-    if (isWall(pos)) return;
+  function moveCargoToLeft(pos: Position): boolean {
+    // if (isWall()) return;
     const id = useMoveCargos(pos, cargos);
     cargos.find((item) => {
       if (item.id === id) {
+        if (isWall({ x: item.x - 1, y: item.y })) {
+          return;
+        }
+
         item.x -= 1;
       }
     });
