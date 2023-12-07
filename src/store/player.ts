@@ -31,6 +31,7 @@ export const usePlayerStore = defineStore("player", () => {
 
   function movePlayerToRight() {
     if (isWall({ x: player.x + 1, y: player.y })) return;
+
     if (useCargoPlayer({ x: player.x + 1, y: player.y }, getCargoPosition())) {
       if (!moveCargoToRight({ x: player.x + 1, y: player.y })) return;
       player.x += 1;
@@ -42,6 +43,7 @@ export const usePlayerStore = defineStore("player", () => {
 
   function movePlayerToDown() {
     if (isWall({ x: player.x, y: player.y + 1 })) return;
+
     if (useCargoPlayer({ x: player.x, y: player.y + 1 }, getCargoPosition())) {
       if (!moveCargoToDown({ x: player.x, y: player.y + 1 })) return;
       player.y += 1;
@@ -52,6 +54,7 @@ export const usePlayerStore = defineStore("player", () => {
 
   function movePlayerToUp() {
     if (isWall({ x: player.x, y: player.y - 1 })) return;
+
     if (useCargoPlayer({ x: player.x, y: player.y - 1 }, getCargoPosition())) {
       if (!moveCargoToTop({ x: player.x, y: player.y - 1 })) return;
       player.y -= 1;
