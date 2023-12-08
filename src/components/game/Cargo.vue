@@ -10,8 +10,14 @@ const props = defineProps<Props>();
 const { position } = usePosition(props);
 </script>
 <template>
-  <div class="absolute" :style="position">
+  <div class="cargo" :style="position">
     <img :src="cargoImg" />
   </div>
 </template>
-<style scoped></style>
+<style scoped>
+.cargo {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+}
+</style>

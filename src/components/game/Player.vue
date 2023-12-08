@@ -42,7 +42,14 @@ function useMove() {
 }
 </script>
 <template>
-  <div class="absolute" :style="position">
+  <div class="player" :style="position">
     <img :src="Player" class="" />
   </div>
 </template>
+<style>
+.player {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+}
+</style>

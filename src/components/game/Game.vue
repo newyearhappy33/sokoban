@@ -6,12 +6,18 @@ import { useCargoStore } from "../../store/cargo";
 const { cargos } = useCargoStore();
 </script>
 <template>
-  <div>
+  <div class="main">
     <Map />
     <Player />
-    <template v-for="cargo in cargos">
+    <template v-for="cargo in cargos" :key="cargo.id">
       <Cargo :x="cargo.x" :y="cargo.y" />
     </template>
   </div>
 </template>
-<style scoped></style>
+<style scoped>
+.main {
+  position: relative;
+  width: auto;
+  height: auto;
+}
+</style>
