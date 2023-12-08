@@ -2,7 +2,6 @@
 import floorImg from "../../assets/floor.png";
 import wall from "../../assets/wall.png";
 import { useMapStore, MapTile } from "../../store/map";
-
 const { map } = useMapStore();
 </script>
 <template>

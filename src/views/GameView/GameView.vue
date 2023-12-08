@@ -6,11 +6,4 @@ import Game from "../../components/game/Game.vue";
     <Game />
   </div>
 </template>
-<style scoped>
-.game {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-</style>
+<style scoped></style>

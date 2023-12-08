@@ -1,7 +1,16 @@
 <script setup lang="ts"></script>
 
 <template>
-  <RouterView />
+  <div class="content">
+    <RouterView />
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+</style>
