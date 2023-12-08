@@ -11,6 +11,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50vh;
+  margin-top: 50px;
 }
 </style>
