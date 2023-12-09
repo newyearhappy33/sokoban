@@ -1,10 +1,10 @@
 <script setup lang="ts"></script>
 <template>
   <div class="utils">
-    <div class="wall"></div>
-    <div class="cargo"></div>
-    <div class="floor"></div>
-    <div class="end"></div>
+    <div data-drop="copy" draggable="true" class="wall"></div>
+    <div data-drop="copy" draggable="true" class="cargo"></div>
+    <div data-drop="copy" draggable="true" class="floor"></div>
+    <div data-drop="copy" draggable="true" class="end"></div>
   </div>
 </template>
 <style scoped>
