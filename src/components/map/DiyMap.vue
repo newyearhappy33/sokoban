@@ -2,7 +2,7 @@
 import MapUtils from "./mapUtils.vue";
 import { useDiyMapStore } from "../../store/diyMap";
 import { onMounted } from "vue";
-const { mapConfig, setMapPosition, updataMap } = useDiyMapStore();
+const { mapConfig, updataMap } = useDiyMapStore();
 
 let container: HTMLElement | null = null;
 
@@ -30,14 +30,18 @@ const useDragstart = (el: HTMLDivElement) => {
       if (dropNode.dataset.drop === "copy") {
         dropNode.innerHTML = "";
 
-        //TODO：这里需要一个函数用来做拖动元素的事件，用来处理拖动的是哪一个元素，并且放置在了那个位置
-        const moveNode = setMapPosition(source!, e);
-        updataMap(moveNode);
-
         const clonedNode = source!.cloneNode(true) as HTMLElement;
         clonedNode.dataset.effect = "move";
 
         dropNode.appendChild(clonedNode);
+
+        //TODO：这里需要一个函数用来做拖动元素的事件，用来处理拖动的是哪一个元素，并且放置在了那个位置
+        // 元素ID： dropNode.dataset.id
+        // source 是拖动的元素
+
+        // const moveNode = setMapPosition(source!, e);
+
+        updataMap(source!, dropNode.dataset.id);
       } else {
         source!.remove();
       }
@@ -59,9 +63,7 @@ function getDropNode(e: HTMLElement | null): HTMLElement | null {
   <div ref="container">
     <div v-for="(row, i) in mapConfig" :key="i" class="flex">
       <div v-for="(cell, j) in row" :key="j">
-        <template v-if="cell === 0">
-          <div data-drop="copy" class="cell"></div>
-        </template>
+        <div data-drop="copy" class="cell" :data-id="cell"></div>
       </div>
     </div>
     <MapUtils />

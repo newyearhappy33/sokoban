@@ -12,39 +12,58 @@ enum MapClass {
   CARGO = "cargo",
   END = "end",
 }
+enum MapID {
+  WALL = 1,
+  FLOOR = 2,
+  CARGO = 3,
+  END = 4,
+}
 export const useDiyMapStore = defineStore("diyMap", () => {
   const mapConfig = reactive<MapConfig>([
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 2, 3, 4, 5, 6, 7, 8],
+    [9, 10, 11, 12, 13, 14, 15, 16, 17],
+    [18, 19, 20, 21, 22, 23, 24, 25, 26],
+    [27, 28, 29, 30, 31, 32, 33, 34, 35],
+    [36, 37, 38, 39, 40, 41, 42, 43, 44],
+    [45, 46, 47, 48, 49, 50, 51, 52, 53],
+    [54, 55, 56, 57, 58, 59, 60, 61, 62],
+    [63, 64, 65, 66, 67, 68, 69, 70, 71],
+    [72, 73, 74, 75, 76, 77, 78, 79, 80],
   ]);
 
-  function setMapPosition(dropNode: HTMLElement, e: DragEvent) {
-    const rows = mapConfig.length; // 获取网格的行数
-    const columns = mapConfig[0]?.length || 0; // 获取网格的列数，假设每行的元素个数相同
-    // 获取拖放目标的坐标信息
-    const rect = dropNode.getBoundingClientRect();
+  function updataMap(el: HTMLElement, id: DOMStringMap[string]) {
+    const nodeClass = el.className;
+    switch (nodeClass) {
+      case MapClass.WALL:
+        setMap(MapID.WALL, id);
+        break;
 
-    // 计算相对位置
-    const offsetX = e.clientX - rect.left;
-    const offsetY = e.clientY - rect.top;
+      case MapClass.FLOOR:
+        setMap(MapID.FLOOR, id);
+        break;
 
-    // 计算数组索引
-    const column = Math.floor(offsetX / (rect.width / columns));
-    const row = Math.floor(offsetY / (rect.height / rows));
+      case MapClass.CARGO:
+        setMap(MapID.CARGO, id);
 
-    return { x: row, y: column };
+        break;
+      case MapClass.END:
+        setMap(MapID.END, id);
+        break;
+
+      default:
+        break;
+    }
   }
 
-  function updataMap(pos: MapPosition) {
-    console.log(pos);
+  function setMap(enumID: MapID, posID: DOMStringMap[string]) {
+    mapConfig.some((item) => {
+      const index = item.findIndex((i) => i == Number(posID));
+      if (index != -1) {
+        item[index] = enumID;
+        return true;
+      }
+    });
   }
 
-  return { mapConfig, setMapPosition, updataMap };
+  return { mapConfig, updataMap };
 });
