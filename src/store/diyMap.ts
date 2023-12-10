@@ -62,5 +62,32 @@ export const useDiyMapStore = defineStore("diyMap", () => {
     });
   }
 
-  return { mapConfig, updataMap };
+  // // 限制所绘制的地图边缘必须是墙体
+  // function isSpecialArray(): boolean {
+  //   const rows = mapConfig.length;
+  //   const columns = mapConfig[0]?.length || 0;
+
+  //   // 检查第一行和最后一行
+  //   if (
+  //     !mapConfig[0].every((num) => num === 1) ||
+  //     !mapConfig[rows - 1].every((num) => num === 1)
+  //   ) {
+  //     return false;
+  //   }
+
+  //   // 检查每一列的第一个元素和最后一个元素
+  //   for (let i = 0; i < rows; i++) {
+  //     if (mapConfig[i][0] !== 1 || mapConfig[i][columns - 1] !== 1) {
+  //       return false;
+  //     }
+  //   }
+
+  //   return true;
+  // }
+
+  function saveMap() {
+    localStorage.setItem("map", JSON.stringify(mapConfig));
+  }
+
+  return { mapConfig, updataMap, saveMap };
 });

@@ -2,7 +2,8 @@
 import MapUtils from "./mapUtils.vue";
 import { useDiyMapStore } from "../../store/diyMap";
 import { onMounted } from "vue";
-const { mapConfig, updataMap } = useDiyMapStore();
+import { useDragstart } from "./DiyMap";
+const { mapConfig, saveMap } = useDiyMapStore();
 
 let container: HTMLElement | null = null;
 
@@ -10,54 +11,15 @@ onMounted(() => {
   useDragstart(container as HTMLDivElement);
 });
 
-let source: HTMLElement | null = null;
-const useDragstart = (el: HTMLDivElement) => {
-  if (!el) return;
-
-  el.ondragstart = (e: any) => {
-    e.dataTransfer!.effectAllowed = e.target.dataset.effect;
-    source = e.target as HTMLElement;
-  };
-
-  el.ondragover = (e: DragEvent) => {
-    e.preventDefault();
-  };
-
-  el.ondrop = (e: DragEvent) => {
-    const dropNode = getDropNode(e.target as HTMLElement);
-
-    if (dropNode && dropNode.dataset.drop === e.dataTransfer!.effectAllowed) {
-      if (dropNode.dataset.drop === "copy") {
-        dropNode.innerHTML = "";
-
-        const clonedNode = source!.cloneNode(true) as HTMLElement;
-        clonedNode.dataset.effect = "move";
-
-        dropNode.appendChild(clonedNode);
-
-        //TODO：这里需要一个函数用来做拖动元素的事件，用来处理拖动的是哪一个元素，并且放置在了那个位置
-        // 元素ID： dropNode.dataset.id
-        // source 是拖动的元素
-
-        // const moveNode = setMapPosition(source!, e);
-
-        updataMap(source!, dropNode.dataset.id);
-      } else {
-        source!.remove();
-      }
-    }
-  };
+const clickOnSave = () => {
+  saveMap();
+  // if (!isSpecialArray()) {
+  //   console.log("地图四周必须是墙壁！");
+  //   return;
+  // } else {
+  //   console.log("保存成功！");
+  // }
 };
-
-function getDropNode(e: HTMLElement | null): HTMLElement | null {
-  while (e) {
-    if (e.dataset && e.dataset.drop) {
-      return e;
-    }
-    e = e.parentNode as HTMLElement;
-  }
-  return null;
-}
 </script>
 <template>
   <div ref="container">
@@ -67,6 +29,7 @@ function getDropNode(e: HTMLElement | null): HTMLElement | null {
       </div>
     </div>
     <MapUtils />
+    <button @click="clickOnSave">clickOnSave</button>
   </div>
 </template>
 <style scoped>
