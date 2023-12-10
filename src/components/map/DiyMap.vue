@@ -2,7 +2,7 @@
 import MapUtils from "./mapUtils.vue";
 import { useDiyMapStore } from "../../store/diyMap";
 import { onMounted } from "vue";
-const { mapConfig, setupMap } = useDiyMapStore();
+const { mapConfig, setMapPosition, updataMap } = useDiyMapStore();
 
 let container: HTMLElement | null = null;
 
@@ -23,23 +23,16 @@ const useDragstart = (el: HTMLDivElement) => {
     e.preventDefault();
   };
 
-  // el.ondragenter = (e: DragEvent) => {
-  //   // clearDragover();
-  //   // const Node = getDropNode(e.target as HTMLElement);
-  //   // const dropNode = getDropNode(e.target as HTMLElement);
-  //   // if (dropNode && dropNode.dataset.drop === e.dataTransfer!.effectAllowed) {
-  //   //   dropNode.classList.add("dragover");
-  //   // }
-  // };
-
   el.ondrop = (e: DragEvent) => {
-    // clearDragover();
-
     const dropNode = getDropNode(e.target as HTMLElement);
 
     if (dropNode && dropNode.dataset.drop === e.dataTransfer!.effectAllowed) {
       if (dropNode.dataset.drop === "copy") {
         dropNode.innerHTML = "";
+
+        //TODO：这里需要一个函数用来做拖动元素的事件，用来处理拖动的是哪一个元素，并且放置在了那个位置
+        const moveNode = setMapPosition(source!, e);
+        updataMap(moveNode);
 
         const clonedNode = source!.cloneNode(true) as HTMLElement;
         clonedNode.dataset.effect = "move";
@@ -51,12 +44,6 @@ const useDragstart = (el: HTMLDivElement) => {
     }
   };
 };
-
-// function clearDragover() {
-//   document.querySelectorAll(".cell").forEach((node) => {
-//     node.classList.remove("dragover");
-//   });
-// }
 
 function getDropNode(e: HTMLElement | null): HTMLElement | null {
   while (e) {
@@ -71,8 +58,7 @@ function getDropNode(e: HTMLElement | null): HTMLElement | null {
 <template>
   <div ref="container">
     <div v-for="(row, i) in mapConfig" :key="i" class="flex">
-      <div v-for="(cell, j) in row" :key="j" @click="setupMap({ x: i, y: j })">
-        <!-- 根据 cell 的值渲染不同的内容 -->
+      <div v-for="(cell, j) in row" :key="j">
         <template v-if="cell === 0">
           <div data-drop="copy" class="cell"></div>
         </template>
