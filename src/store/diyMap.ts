@@ -2,10 +2,7 @@ import { defineStore } from "pinia";
 import { reactive } from "vue";
 
 type MapConfig = number[][];
-type MapPosition = {
-  x: number;
-  y: number;
-};
+
 enum MapClass {
   WALL = "wall",
   FLOOR = "floor",
