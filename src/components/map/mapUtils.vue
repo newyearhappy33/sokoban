@@ -1,10 +1,10 @@
 <script setup lang="ts"></script>
 <template>
-  <div class="utils">
-    <div data-drop="copy" draggable="true" class="wall"></div>
-    <div data-drop="copy" draggable="true" class="cargo"></div>
-    <div data-drop="copy" draggable="true" class="floor"></div>
-    <div data-drop="copy" draggable="true" class="end"></div>
+  <div class="utils" data-drop="move">
+    <div data-effect="copy" draggable="true" class="wall"></div>
+    <div data-effect="copy" draggable="true" class="cargo"></div>
+    <div data-effect="copy" draggable="true" class="floor"></div>
+    <div data-effect="copy" draggable="true" class="end"></div>
   </div>
 </template>
 <style scoped>
@@ -16,32 +16,32 @@
   margin-top: 15px;
 }
 .wall {
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   background: url(../../assets/wall.png);
   background-size: contain;
   border-radius: 5px;
   overflow: hidden;
 }
 .cargo {
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   background: url(../../assets/cargo.png);
   background-size: contain;
   border-radius: 5px;
   overflow: hidden;
 }
 .floor {
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   background: url(../../assets/floor.png);
   background-size: contain;
   border-radius: 5px;
   overflow: hidden;
 }
 .end {
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   background: url(../../assets/target.png);
   background-size: contain;
   border-radius: 5px;
