@@ -3,7 +3,7 @@ import MapUtils from "./mapUtils.vue";
 import { useDiyMapStore } from "../../store/diyMap";
 import { onMounted } from "vue";
 import { useDragstart } from "./DiyMap";
-const { mapConfig, saveMap } = useDiyMapStore();
+const { mapConfig, saveMap, isSpecialArray } = useDiyMapStore();
 
 let container: HTMLElement | null = null;
 
@@ -12,13 +12,13 @@ onMounted(() => {
 });
 
 const clickOnSave = () => {
-  saveMap();
-  // if (!isSpecialArray()) {
-  //   console.log("地图四周必须是墙壁！");
-  //   return;
-  // } else {
-  //   console.log("保存成功！");
-  // }
+  if (!isSpecialArray()) {
+    console.log("地图四周必须是墙壁！");
+    return;
+  } else {
+    saveMap();
+    console.log("保存成功！");
+  }
 };
 </script>
 <template>
