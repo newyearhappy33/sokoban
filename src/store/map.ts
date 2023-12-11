@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import type { Position } from "../composables/usePosition";
+import { Cargo, Direction, Position } from "../composables/usePosition";
 export enum MapTile {
   WALL = 1,
   FLOOR = 2,
@@ -20,14 +20,56 @@ export const useMapStore = defineStore("map", () => {
     map.splice(0, map.length, ...newMap);
   }
 
-  function isWall(position: Position) {
-    return map[position.x][position.y] == MapTile.WALL;
+  function isWall(position: Position, keyDown?: String) {
+    if (position.length > 1) {
+      switch (keyDown) {
+        case Direction.LEFT:
+          return position.some((item) => {
+            return map[item.y][item.x - 1] === MapTile.WALL;
+          });
+        case Direction.RIGHT:
+          return position.some((item) => {
+            return map[item.y][item.x + 1] === MapTile.WALL;
+          });
+        case Direction.DOWN:
+          return position.some((item) => {
+            return map[item.y + 1][item.x] === MapTile.WALL;
+          });
+        case Direction.TOP:
+          return position.some((item) => {
+            return map[item.y - 1][item.x] === MapTile.WALL;
+          });
+        default:
+          return false;
+      }
+    } else {
+      switch (keyDown) {
+        case Direction.LEFT:
+          return map[position[0].y][position[0].x - 1] === MapTile.WALL;
+        case Direction.RIGHT:
+          return map[position[0].y][position[0].x + 1] === MapTile.WALL;
+        case Direction.DOWN:
+          return map[position[0].y + 1][position[0].x] === MapTile.WALL;
+        case Direction.TOP:
+          return map[position[0].y - 1][position[0].x] === MapTile.WALL;
+        default:
+          return false;
+      }
+    }
   }
 
-  function isCargos(start: Position, cargos: any) {
-    return cargos.some((item: any) => {
-      return item.x === start.x && item.y === start.y;
-    });
+  function isCargos(pos: Position, cargos: Cargo) {
+    if (pos.length > 1) {
+      return pos.some((item) => {
+        return cargos.some((cargo: any) => {
+          return cargo.x === item.x && cargo.y === item.y;
+        });
+      });
+    } else {
+      return cargos.some((item: any) => {
+        return item.x === pos[0].x && item.y === pos[0].y;
+      });
+    }
   }
   return { map, setupMap, isWall, isCargos };
 });

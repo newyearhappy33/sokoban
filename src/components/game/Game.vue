@@ -14,7 +14,7 @@ const mapWidth = computed(() => map[0].length * 32 + "px");
     <Map />
     <Player />
     <template v-for="cargo in cargos" :key="cargo.id">
-      <Cargo :x="cargo.x" :y="cargo.y" />
+      <Cargo :id="cargo.id" :x="cargo.x" :y="cargo.y" />
     </template>
   </div>
 </template>

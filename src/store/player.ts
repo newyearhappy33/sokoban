@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { reactive } from "vue";
-import { useCargoPlayer } from "../composables/usePosition";
+import { Position, useCargoPlayer } from "../composables/usePosition";
 import { useCargoStore } from "./cargo";
 import { useMapStore } from "./map";
 
@@ -13,54 +13,104 @@ export const usePlayerStore = defineStore("player", () => {
     moveCargoToDown,
     moveCargoToTop,
   } = useCargoStore();
-  const player = reactive({
-    x: 1,
-    y: 1,
-  });
+  const player = reactive<Position>([
+    {
+      id: 0,
+      x: 1,
+      y: 1,
+    },
+  ]);
 
   function movePlayerToLeft() {
-    if (isWall({ x: player.x - 1, y: player.y })) return;
+    if (isWall(player, "left")) return;
 
-    if (useCargoPlayer({ x: player.x - 1, y: player.y }, getCargoPosition())) {
-      if (!moveCargoToLeft({ x: player.x - 1, y: player.y })) return;
-      player.x -= 1;
+    if (useCargoPlayer(player, getCargoPosition())) {
+      if (!moveCargoToLeft(player)) return;
+      if (player.length > 1) {
+        player.forEach((item) => {
+          item.x -= 1;
+        });
+      } else {
+        player[0].x -= 1;
+      }
       return;
     }
-    player.x -= 1;
+    if (player.length > 1) {
+      player.forEach((item) => {
+        item.x -= 1;
+      });
+    } else {
+      player[0].x -= 1;
+    }
   }
 
   function movePlayerToRight() {
-    if (isWall({ x: player.x + 1, y: player.y })) return;
+    if (isWall(player, "right")) return;
 
-    if (useCargoPlayer({ x: player.x + 1, y: player.y }, getCargoPosition())) {
-      if (!moveCargoToRight({ x: player.x + 1, y: player.y })) return;
-      player.x += 1;
+    if (useCargoPlayer(player, getCargoPosition())) {
+      if (!moveCargoToRight(player)) return;
+      if (player.length > 1) {
+        player.forEach((item) => {
+          item.x += 1;
+        });
+      } else {
+        player[0].x += 1;
+      }
       return;
     }
-
-    player.x += 1;
+    if (player.length > 1) {
+      player.forEach((item) => {
+        item.x += 1;
+      });
+    } else {
+      player[0].x += 1;
+    }
   }
 
   function movePlayerToDown() {
-    if (isWall({ x: player.x, y: player.y + 1 })) return;
+    if (isWall(player, "down")) return;
 
-    if (useCargoPlayer({ x: player.x, y: player.y + 1 }, getCargoPosition())) {
-      if (!moveCargoToDown({ x: player.x, y: player.y + 1 })) return;
-      player.y += 1;
+    if (useCargoPlayer(player, getCargoPosition())) {
+      if (!moveCargoToDown(player)) return;
+      if (player.length > 1) {
+        player.forEach((item) => {
+          item.y += 1;
+        });
+      } else {
+        player[0].y += 1;
+      }
       return;
     }
-    player.y += 1;
+    if (player.length > 1) {
+      player.forEach((item) => {
+        item.y += 1;
+      });
+    } else {
+      player[0].y += 1;
+    }
   }
 
   function movePlayerToUp() {
-    if (isWall({ x: player.x, y: player.y - 1 })) return;
+    if (isWall(player, "up")) return;
 
-    if (useCargoPlayer({ x: player.x, y: player.y - 1 }, getCargoPosition())) {
-      if (!moveCargoToTop({ x: player.x, y: player.y - 1 })) return;
-      player.y -= 1;
+    if (useCargoPlayer(player, getCargoPosition())) {
+      if (!moveCargoToTop(player)) return;
+      if (player.length > 1) {
+        player.forEach((item) => {
+          item.y -= 1;
+        });
+      } else {
+        player[0].y -= 1;
+      }
       return;
     }
-    player.y -= 1;
+    if (player.length > 1) {
+      player.forEach((item) => {
+        item.y -= 1;
+      });
+    } else {
+      player[0].y -= 1;
+    }
   }
 
   function getPlayerPosition() {

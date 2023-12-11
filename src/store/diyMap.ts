@@ -62,7 +62,7 @@ export const useDiyMapStore = defineStore("diyMap", () => {
     });
   }
 
-  // // 限制所绘制的地图边缘必须是墙体
+  // 限制所绘制的地图边缘必须是墙体
   function isSpecialArray(): boolean {
     const rows = mapConfig.length;
     const columns = mapConfig[0]?.length || 0;

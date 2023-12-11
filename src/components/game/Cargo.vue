@@ -3,15 +3,18 @@ import cargoImg from "../../assets/cargo.png";
 import { usePosition } from "../../composables/usePosition";
 
 interface Props {
+  id: number;
   x: number;
   y: number;
 }
 const props = defineProps<Props>();
-const { position } = usePosition(props);
+const { position } = usePosition([props]);
 </script>
 <template>
-  <div class="cargo" :style="position">
-    <img :src="cargoImg" />
+  <div>
+    <div class="cargo" :style="position">
+      <img :src="cargoImg" />
+    </div>
   </div>
 </template>
 <style scoped>

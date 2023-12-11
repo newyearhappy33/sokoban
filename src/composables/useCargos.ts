@@ -8,20 +8,25 @@ export function useCargosPosition(
   direction: string
 ): boolean {
   const { isWall, isCargos } = useMapStore();
-  const id = useMoveCargos(pos, cargos);
+
+  const id = useMoveCargos(pos, cargos); // 获取到要推动箱子的ID
+
   let res = true;
+
   cargos.find((item) => {
+    // 判断是否有箱子
     if (item.id === id) {
-      const newPos = useNewPosition(item, direction);
-      if (isWall(newPos)) {
+      // 获取箱子新的位置
+      const newPos = useNewPosition([item], direction);
+      // 判断箱子新的位置是否有墙或者其他箱子
+      if (isWall(newPos) && isCargos(newPos, cargos)) {
         return (res = false);
       }
-      if (isCargos(newPos, cargos)) {
-        return (res = false);
-      }
-      item.x = newPos.x;
-      item.y = newPos.y;
+      // 更新箱子的位置
+      item.x = newPos[0].x;
+      item.y = newPos[0].y;
     }
   });
+
   return res;
 }
