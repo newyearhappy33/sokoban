@@ -1,5 +1,5 @@
 import { useMapStore } from "../store/map";
-import { useMoveCargos, useNewPosition } from "./usePosition";
+import { useMoveCargosID, useNewPosition } from "./usePosition";
 import type { Cargo, Position } from "./usePosition";
 
 export function useCargosPosition(
@@ -9,7 +9,7 @@ export function useCargosPosition(
 ): boolean {
   const { isWall, isCargos } = useMapStore();
 
-  const id = useMoveCargos(pos, cargos); // 获取到要推动箱子的ID
+  const id = useMoveCargosID(pos, cargos); // 获取到要推动箱子的ID
 
   let res = true;
 

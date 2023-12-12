@@ -68,10 +68,11 @@ export const usePlayerStore = defineStore("player", () => {
   }
 
   function movePlayerToDown() {
-    if (isWall(player, "down")) return;
+    if (isWall(player, "down")) return; // 人物撞墙检测
 
+    //  判断移动方向是否有箱体
     if (useCargoPlayer(player, getCargoPosition())) {
-      if (!moveCargoToDown(player)) return;
+      if (!moveCargoToDown(player)) return; // 箱体移动成功检测
       if (player.length > 1) {
         player.forEach((item) => {
           item.y += 1;
@@ -91,7 +92,7 @@ export const usePlayerStore = defineStore("player", () => {
   }
 
   function movePlayerToUp() {
-    if (isWall(player, "up")) return;
+    if (isWall(player, "top")) return;
 
     if (useCargoPlayer(player, getCargoPosition())) {
       if (!moveCargoToTop(player)) return;
@@ -117,10 +118,10 @@ export const usePlayerStore = defineStore("player", () => {
     return player;
   }
 
-  function setupPlayer(newPlayer: { x: number; y: number }) {
-    player.x = newPlayer.x;
-    player.y = newPlayer.y;
-  }
+  // function setupPlayer(newPlayer: { x: number; y: number }) {
+  //   player.x = newPlayer.x;
+  //   player.y = newPlayer.y;
+  // }
 
   return {
     player,
@@ -129,6 +130,5 @@ export const usePlayerStore = defineStore("player", () => {
     movePlayerToDown,
     movePlayerToUp,
     getPlayerPosition,
-    setupPlayer,
   };
 });

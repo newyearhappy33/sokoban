@@ -1,4 +1,4 @@
-import { computed, ComputedRef } from "vue";
+import { computed } from "vue";
 interface playerPosition {
   id: number;
   x: number;
@@ -54,7 +54,7 @@ export function useCargoPlayer(player: Position, cargo: any) {
 }
 
 // 获取到要推动箱子的ID
-export function useMoveCargos(pos: Position, cargos: Cargo) {
+export function useMoveCargosID(pos: Position, cargos: Cargo) {
   for (const data of cargos) {
     if (pos.length > 1) {
       for (const item of pos) {
@@ -101,13 +101,13 @@ export function useNewPosition(pos: Position, direction: string) {
   } else {
     switch (direction) {
       case Direction.LEFT:
-        return [{ ...pos[0], x: pos[0].x - 1 }];
+        return [{ ...pos[0], x: pos[0].x - 1, y: pos[0].y }];
       case Direction.RIGHT:
-        return [{ ...pos[0], x: pos[0].x + 1 }];
+        return [{ ...pos[0], x: pos[0].x + 1, y: pos[0].y }];
       case Direction.TOP:
-        return [{ ...pos[0], y: pos[0].y - 1 }];
+        return [{ ...pos[0], x: pos[0].x, y: pos[0].y - 1 }];
       case Direction.DOWN:
-        return [{ ...pos[0], y: pos[0].y + 1 }];
+        return [{ ...pos[0], x: pos[0].x, y: pos[0].y + 1 }];
       default:
         return pos;
     }
