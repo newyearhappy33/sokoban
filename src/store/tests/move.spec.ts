@@ -1,6 +1,6 @@
 import { createPinia, setActivePinia } from "pinia";
 import { it, expect, describe, beforeEach } from "vitest";
-import { useCargoPlayer } from "../../composables/usePosition";
+import { useHaveCargo } from "../../composables/usePosition";
 import { useCargoStore } from "../cargo";
 import { usePlayerStore } from "../player";
 describe("map", () => {
@@ -17,8 +17,6 @@ describe("map", () => {
       { id: 2, x: 2, y: 2 },
     ]);
 
-    expect(useCargoPlayer(getPlayerPosition(), getCargoPosition())).toEqual(
-      true
-    );
+    expect(useHaveCargo(getPlayerPosition(), getCargoPosition())).toEqual(true);
   });
 });

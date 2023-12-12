@@ -16,18 +16,49 @@ export const useCargoStore = defineStore("cargo", () => {
     return cargos;
   }
 
+  // TODO:bug在这里，传递pos时，需要进行数据处理
   function moveCargoToLeft(pos: Position) {
-    return useCargosPosition(pos, cargos, "left");
+    const newPos = pos.map((item) => {
+      return {
+        id: item.id,
+        x: item.x - 1,
+        y: item.y,
+      };
+    });
+
+    return useCargosPosition(newPos, cargos, "left");
   }
 
   function moveCargoToRight(pos: Position) {
-    return useCargosPosition(pos, cargos, "right");
+    const newPos = pos.map((item) => {
+      return {
+        id: item.id,
+        x: item.x + 1,
+        y: item.y,
+      };
+    });
+
+    return useCargosPosition(newPos, cargos, "right");
   }
   function moveCargoToTop(pos: Position) {
-    return useCargosPosition(pos, cargos, "top");
+    const newPos = pos.map((item) => {
+      return {
+        id: item.id,
+        x: item.x,
+        y: item.y - 1,
+      };
+    });
+    return useCargosPosition(newPos, cargos, "top");
   }
   function moveCargoToDown(pos: Position) {
-    return useCargosPosition(pos, cargos, "down");
+    const newPos = pos.map((item) => {
+      return {
+        id: item.id,
+        x: item.x,
+        y: item.y + 1,
+      };
+    });
+    return useCargosPosition(newPos, cargos, "down");
   }
 
   return {

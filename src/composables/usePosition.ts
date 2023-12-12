@@ -35,22 +35,22 @@ export function usePosition(pos: Position) {
 }
 
 // 判断是否有箱子
-export function useCargoPlayer(player: Position, cargo: any) {
-  if (player.length > 1) {
-    for (const data of player) {
-      if (data.x === cargo.x && data.y === cargo.y) {
-        return data.id;
-      }
-    }
-    return null;
-  } else {
-    return cargo.some((item: any) => {
-      return (
-        item.x * STEP === player[0].x * STEP &&
-        item.y * STEP === player[0].y * STEP
-      );
-    });
-  }
+export function useHaveCargo(player: Position, cargo: any) {
+  // if (player.length > 1) {
+  //   for (const data of player) {
+  //     if (data.x === cargo.x && data.y === cargo.y) {
+  //       return data.id;
+  //     }
+  //   }
+  //   return null;
+  // } else {
+  return cargo.some((item: any) => {
+    return (
+      item.x * STEP === player[0].x * STEP &&
+      item.y * STEP === player[0].y * STEP
+    );
+  });
+  // }
 }
 
 // 获取到要推动箱子的ID
@@ -76,6 +76,7 @@ export enum Direction {
   DOWN = "down",
 }
 
+// 更新位置
 export function useNewPosition(pos: Position, direction: string) {
   if (pos.length > 1) {
     switch (direction) {
