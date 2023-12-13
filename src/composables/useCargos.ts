@@ -7,7 +7,7 @@ export function useCargosPosition(
   cargos: Cargo,
   direction: string
 ): boolean {
-  const { isWall, isCargos } = useMapStore();
+  const { isWall, isCargos, cargoIntoWall } = useMapStore();
 
   const id = useMoveCargosID(pos, cargos); // 获取到要推动箱子的ID
 
@@ -19,7 +19,7 @@ export function useCargosPosition(
       // 获取箱子新的位置
       const newPos = useNewPosition([item], direction);
       // 判断箱子新的位置是否有墙或者其他箱子
-      if (isWall(newPos) && isCargos(newPos, cargos)) {
+      if (cargoIntoWall(newPos) && isCargos(newPos, cargos)) {
         return (res = false);
       }
       // 更新箱子的位置

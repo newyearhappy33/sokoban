@@ -58,6 +58,12 @@ export const useMapStore = defineStore("map", () => {
     }
   }
 
+  function cargoIntoWall(cargoPos: Cargo): boolean {
+    return cargoPos.some((item) => {
+      return map[item.y][item.x] === MapTile.WALL;
+    });
+  }
+
   function isCargos(pos: Position, cargos: Cargo) {
     if (pos.length > 1) {
       return pos.some((item) => {
@@ -71,5 +77,5 @@ export const useMapStore = defineStore("map", () => {
       });
     }
   }
-  return { map, setupMap, isWall, isCargos };
+  return { map, setupMap, isWall, isCargos, cargoIntoWall };
 });

@@ -58,7 +58,15 @@ export const usePlayerStore = defineStore("player", () => {
   function movePlayerToRight() {
     if (isWall(player, "right")) return;
 
-    if (useHaveCargo(player, getCargoPosition())) {
+    const newPlayer = player.map((item) => {
+      return {
+        id: item.id,
+        x: item.x + 1,
+        y: item.y,
+      };
+    });
+
+    if (useHaveCargo(newPlayer, getCargoPosition())) {
       if (!moveCargoToRight(player)) return;
       if (player.length > 1) {
         player.forEach((item) => {
@@ -81,8 +89,16 @@ export const usePlayerStore = defineStore("player", () => {
   function movePlayerToDown() {
     if (isWall(player, "down")) return; // 人物撞墙检测
 
+    const newPlayer = player.map((item) => {
+      return {
+        id: item.id,
+        x: item.x,
+        y: item.y + 1,
+      };
+    });
+
     //  判断移动方向是否有箱体
-    if (useHaveCargo(player, getCargoPosition())) {
+    if (useHaveCargo(newPlayer, getCargoPosition())) {
       if (!moveCargoToDown(player)) return; // 箱体移动成功检测
       if (player.length > 1) {
         player.forEach((item) => {
@@ -105,7 +121,15 @@ export const usePlayerStore = defineStore("player", () => {
   function movePlayerToUp() {
     if (isWall(player, "top")) return;
 
-    if (useHaveCargo(player, getCargoPosition())) {
+    const newPlayer = player.map((item) => {
+      return {
+        id: item.id,
+        x: item.x,
+        y: item.y - 1,
+      };
+    });
+
+    if (useHaveCargo(newPlayer, getCargoPosition())) {
       if (!moveCargoToTop(player)) return;
       if (player.length > 1) {
         player.forEach((item) => {
