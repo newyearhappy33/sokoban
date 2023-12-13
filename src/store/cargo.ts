@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { Cargo, Position } from "../composables/usePosition";
 import { reactive } from "vue";
-import { useCargosPosition } from "../composables/useCargos";
+import useCargosPosition from "../composables/useCargos";
 export const useCargoStore = defineStore("cargo", () => {
   const cargos: Cargo = reactive([
     { id: 1, x: 2, y: 2 },
@@ -16,49 +16,21 @@ export const useCargoStore = defineStore("cargo", () => {
     return cargos;
   }
 
-  // TODO:bug在这里，传递pos时，需要进行数据处理
+  /**
+   * @description 箱体移动事件
+   */
   function moveCargoToLeft(pos: Position) {
-    const newPos = pos.map((item) => {
-      return {
-        id: item.id,
-        x: item.x - 1,
-        y: item.y,
-      };
-    });
-
-    return useCargosPosition(newPos, cargos, "left");
+    return useCargosPosition(pos, cargos, "left");
   }
 
   function moveCargoToRight(pos: Position) {
-    const newPos = pos.map((item) => {
-      return {
-        id: item.id,
-        x: item.x + 1,
-        y: item.y,
-      };
-    });
-
-    return useCargosPosition(newPos, cargos, "right");
+    return useCargosPosition(pos, cargos, "right");
   }
   function moveCargoToTop(pos: Position) {
-    const newPos = pos.map((item) => {
-      return {
-        id: item.id,
-        x: item.x,
-        y: item.y - 1,
-      };
-    });
-    return useCargosPosition(newPos, cargos, "top");
+    return useCargosPosition(pos, cargos, "top");
   }
   function moveCargoToDown(pos: Position) {
-    const newPos = pos.map((item) => {
-      return {
-        id: item.id,
-        x: item.x,
-        y: item.y + 1,
-      };
-    });
-    return useCargosPosition(newPos, cargos, "down");
+    return useCargosPosition(pos, cargos, "down");
   }
 
   return {

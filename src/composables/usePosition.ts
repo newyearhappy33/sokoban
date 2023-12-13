@@ -36,21 +36,21 @@ export function usePosition(pos: Position) {
 
 // 判断是否有箱子
 export function useHaveCargo(player: Position, cargo: any) {
-  // if (player.length > 1) {
-  //   for (const data of player) {
-  //     if (data.x === cargo.x && data.y === cargo.y) {
-  //       return data.id;
-  //     }
-  //   }
-  //   return null;
-  // } else {
-  return cargo.some((item: any) => {
-    return (
-      item.x * STEP === player[0].x * STEP &&
-      item.y * STEP === player[0].y * STEP
-    );
-  });
-  // }
+  if (player.length > 1) {
+    for (const data of player) {
+      if (data.x === cargo.x && data.y === cargo.y) {
+        return data.id;
+      }
+    }
+    return null;
+  } else {
+    return cargo.some((item: any) => {
+      return (
+        item.x * STEP === player[0].x * STEP &&
+        item.y * STEP === player[0].y * STEP
+      );
+    });
+  }
 }
 
 // 获取到要推动箱子的ID

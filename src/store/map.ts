@@ -20,6 +20,13 @@ export const useMapStore = defineStore("map", () => {
     map.splice(0, map.length, ...newMap);
   }
 
+  /**
+   *
+   * @param position 坐标位置
+   * @param keyDown 键盘按键
+   * @returns Boolean
+   * @description 检测是否撞墙
+   */
   function isWall(position: Position, keyDown?: String) {
     if (position.length > 1) {
       switch (keyDown) {
@@ -58,12 +65,18 @@ export const useMapStore = defineStore("map", () => {
     }
   }
 
+  /**
+   * @description 检测箱体是否撞墙
+   */
   function cargoIntoWall(cargoPos: Cargo): boolean {
     return cargoPos.some((item) => {
       return map[item.y][item.x] === MapTile.WALL;
     });
   }
 
+  /**
+   * @description 检测箱体前方是否有箱体
+   */
   function isCargos(pos: Position, cargos: Cargo) {
     if (pos.length > 1) {
       return pos.some((item) => {
