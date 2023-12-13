@@ -6,10 +6,14 @@ import { useCargoStore } from "../../store/cargo";
 import { useMapStore } from "../../store/map";
 import { computed } from "vue";
 import { usePlayerStore } from "../../store/player";
-const { map } = useMapStore();
+const { map, cargosToEnd } = useMapStore();
 const { cargos } = useCargoStore();
 const { player } = usePlayerStore();
 const mapWidth = computed(() => map[0].length * 32 + "px");
+
+if (cargosToEnd(cargos)) {
+  alert("游戏结束");
+}
 </script>
 <template>
   <div class="main" :style="{ width: mapWidth }">

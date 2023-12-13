@@ -64,7 +64,6 @@ function useMove() {
 }
 </script>
 <template>
-  {{ position }}
   <div class="player" :style="position">
     <template v-if="props.id === 0">
       <img :src="Player" class="" />

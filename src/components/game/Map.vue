@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import floorImg from "../../assets/floor.png";
+import target from "../../assets/target.png";
 import wall from "../../assets/wall.png";
 import { useMapStore, MapTile } from "../../store/map";
 const { map } = useMapStore();
@@ -12,6 +13,9 @@ const { map } = useMapStore();
       </template>
       <template v-else-if="map[i][j] == MapTile.FLOOR">
         <img :src="floorImg" />
+      </template>
+      <template v-else-if="map[i][j] == MapTile.END">
+        <img :src="target" />
       </template>
     </div>
   </div>

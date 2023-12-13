@@ -27,7 +27,7 @@ export const useCargoStore = defineStore("cargo", () => {
     return useCargosPosition(pos, cargos, "right", playID);
   }
   function moveCargoToTop(pos: Position, playID: number) {
-    return useCargosPosition(pos, cargos, "top", playID);
+    return useCargosPosition(pos, cargos, "up", playID);
   }
   function moveCargoToDown(pos: Position, playID: number) {
     return useCargosPosition(pos, cargos, "down", playID);

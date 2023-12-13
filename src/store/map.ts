@@ -3,17 +3,22 @@ import { Cargo, Direction, Position } from "../composables/usePosition";
 export enum MapTile {
   WALL = 1,
   FLOOR = 2,
+  END = 3,
 }
 type Map = MapTile[][];
 
 export const useMapStore = defineStore("map", () => {
   let map = [
-    [1, 1, 1, 1, 1, 1],
-    [1, 2, 2, 2, 2, 1],
-    [1, 2, 2, 2, 2, 1],
-    [1, 2, 2, 2, 2, 1],
-    [1, 2, 2, 2, 2, 1],
-    [1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+    [1, 2, 2, 2, 2, 2, 1, 2, 2, 1],
+    [1, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+    [1, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+    [1, 2, 2, 1, 1, 2, 2, 2, 2, 1],
+    [1, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+    [1, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+    [1, 2, 2, 2, 2, 2, 3, 3, 2, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
   ];
 
   function setupMap(newMap: Map) {
@@ -29,7 +34,6 @@ export const useMapStore = defineStore("map", () => {
    */
   function isWall(position: Position, playID: number, keyDown?: String) {
     if (playID === 1) {
-      debugger;
       switch (keyDown) {
         case Direction.KeyA:
           return position.some((item) => {
@@ -91,5 +95,16 @@ export const useMapStore = defineStore("map", () => {
       });
     }
   }
-  return { map, setupMap, isWall, isCargos, cargoIntoWall };
+
+  /**
+   *
+   * @description 判断箱子是否全部到达目的地
+   */
+  function cargosToEnd(cargos: Cargo) {
+    return cargos.every((item) => {
+      return map[item.y][item.x] === MapTile.END;
+    });
+  }
+
+  return { map, setupMap, isWall, isCargos, cargoIntoWall, cargosToEnd };
 });
