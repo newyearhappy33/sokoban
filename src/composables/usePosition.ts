@@ -34,16 +34,27 @@ export function usePosition(pos: Position) {
   return { position };
 }
 
-// 判断是否有箱子
-export function useHaveCargo(player: Position, cargo: any) {
-  if (player.length > 1) {
-    for (const data of player) {
-      if (data.x === cargo.x && data.y === cargo.y) {
-        return data.id;
-      }
-    }
-    return null;
-  } else {
+/**
+ *
+ * @param player 坐标位置
+ * @param cargo  箱体
+ * @param playID 玩家ID
+ * @returns Boolean
+ * @description 判断玩家移动的方向是否有箱子
+ */
+export function useHaveCargo(
+  player: Position,
+  cargo: any,
+  playID: number
+): boolean {
+  if (playID === 1) {
+    return cargo.some((item: any) => {
+      return (
+        item.x * STEP === player[0].x * STEP &&
+        item.y * STEP === player[0].y * STEP
+      );
+    });
+  } else if (playID === 0) {
     return cargo.some((item: any) => {
       return (
         item.x * STEP === player[0].x * STEP &&
@@ -51,16 +62,17 @@ export function useHaveCargo(player: Position, cargo: any) {
       );
     });
   }
+  return false;
 }
 
-// 获取到要推动箱子的ID
-export function useMoveCargosID(pos: Position, cargos: Cargo) {
+/**
+ * @description 获取到要推动箱子的ID
+ */
+export function useMoveCargosID(pos: Position, cargos: Cargo, playID: number) {
   for (const data of cargos) {
-    if (pos.length > 1) {
-      for (const item of pos) {
-        if (data.x === item.x && data.y === item.y) {
-          return data.id;
-        }
+    if (playID === 1) {
+      if (data.x === pos[0].x && data.y === pos[0].y) {
+        return data.id;
       }
     } else if (data.x === pos[0].x && data.y === pos[0].y) {
       return data.id;
@@ -72,34 +84,40 @@ export function useMoveCargosID(pos: Position, cargos: Cargo) {
 export enum Direction {
   LEFT = "left",
   RIGHT = "right",
-  TOP = "top",
+  TOP = "up",
   DOWN = "down",
+  KeyA = "left",
+  KeyD = "right",
+  KeyW = "up",
+  KeyS = "down",
 }
 
-// 更新位置
-export function useNewPosition(pos: Position, direction: string) {
-  if (pos.length > 1) {
+/**
+ *
+ * @param pos 坐标位置
+ * @param direction 键盘按键
+ * @param playID  玩家ID
+ * @returns
+ */
+export function useNewPosition(
+  pos: Position,
+  direction: string,
+  playID: number
+) {
+  if (playID === 1) {
     switch (direction) {
-      case Direction.LEFT:
-        return pos.map((item) => {
-          return { ...item, x: item.x - 1 };
-        });
-      case Direction.RIGHT:
-        return pos.map((item) => {
-          return { ...item, x: item.x + 1 };
-        });
-      case Direction.TOP:
-        return pos.map((item) => {
-          return { ...item, y: item.y - 1 };
-        });
-      case Direction.DOWN:
-        return pos.map((item) => {
-          return { ...item, y: item.y + 1 };
-        });
+      case Direction.KeyA:
+        return [{ ...pos[0], x: pos[0].x - 1, y: pos[0].y }];
+      case Direction.KeyD:
+        return [{ ...pos[0], x: pos[0].x + 1, y: pos[0].y }];
+      case Direction.KeyW:
+        return [{ ...pos[0], x: pos[0].x, y: pos[0].y - 1 }];
+      case Direction.KeyS:
+        return [{ ...pos[0], x: pos[0].x, y: pos[0].y + 1 }];
       default:
         return pos;
     }
-  } else {
+  } else if (playID === 0) {
     switch (direction) {
       case Direction.LEFT:
         return [{ ...pos[0], x: pos[0].x - 1, y: pos[0].y }];

@@ -13,19 +13,19 @@ import type { Cargo, Position } from "./usePosition";
 function useCargosPosition(
   pos: Position,
   cargos: Cargo,
-  direction: string
+  direction: string,
+  playID: number
 ): boolean {
   const { isCargos, cargoIntoWall } = useMapStore();
-  const id = useMoveCargosID(pos, cargos); // 获取到要推动箱子的ID
+  const id = useMoveCargosID(pos, cargos, playID); // 获取到要推动箱子的ID
 
   let res = true;
 
   cargos.find((item) => {
     // 判断是否有箱子
     if (item.id === id) {
-      const newPos = useNewPosition([item], direction); // 获取箱子新的位置
-
-      if (cargoIntoWall(newPos) || isCargos(newPos, cargos)) {
+      const newPos = useNewPosition([item], direction, playID); // 获取箱子新的位置
+      if (cargoIntoWall(newPos!) || isCargos(newPos!, cargos)) {
         return (res = false);
       } else {
         // 更新箱子的位置

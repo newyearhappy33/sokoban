@@ -1,38 +1,60 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted } from "vue";
 import Player from "../../assets/keeper.png";
+import Player1 from "../../assets/keeper1.png";
 import { usePlayerStore } from "../../store/player";
 import { usePosition } from "../../composables/usePosition";
-// import { useMove } from "./player";
+
+interface Props {
+  id: number;
+  x: number;
+  y: number;
+}
+const props = defineProps<Props>();
+const { position } = usePosition([props]);
+const {
+  movePlayerToUp,
+  movePlayerToDown,
+  movePlayerToLeft,
+  movePlayerToRight,
+} = usePlayerStore();
 
 useMove();
-const { player } = usePlayerStore();
-const { position } = usePosition(player);
-
 function useMove() {
-  const {
-    movePlayerToUp,
-    movePlayerToDown,
-    movePlayerToLeft,
-    movePlayerToRight,
-  } = usePlayerStore();
-
   function handleKeyUp(e: KeyboardEvent) {
-    switch (e.code) {
-      case "ArrowLeft":
-        movePlayerToLeft();
-        break;
-      case "ArrowRight":
-        movePlayerToRight();
-        break;
-      case "ArrowUp":
-        movePlayerToUp();
-        break;
-      case "ArrowDown":
-        movePlayerToDown();
-        break;
+    if (props.id === 0) {
+      switch (e.code) {
+        case "ArrowLeft":
+          movePlayerToLeft(props.id);
+          break;
+        case "ArrowRight":
+          movePlayerToRight(props.id);
+          break;
+        case "ArrowUp":
+          movePlayerToUp(props.id);
+          break;
+        case "ArrowDown":
+          movePlayerToDown(props.id);
+          break;
+      }
+    } else if (props.id === 1) {
+      switch (e.code) {
+        case "KeyA":
+          movePlayerToLeft(props.id);
+          break;
+        case "KeyD":
+          movePlayerToRight(props.id);
+          break;
+        case "KeyW":
+          movePlayerToUp(props.id);
+          break;
+        case "KeyS":
+          movePlayerToDown(props.id);
+          break;
+      }
     }
   }
+
   onMounted(() => {
     window.addEventListener("keyup", handleKeyUp);
   });
@@ -42,8 +64,14 @@ function useMove() {
 }
 </script>
 <template>
+  {{ position }}
   <div class="player" :style="position">
-    <img :src="Player" class="" />
+    <template v-if="props.id === 0">
+      <img :src="Player" class="" />
+    </template>
+    <template v-if="props.id === 1">
+      <img :src="Player1" class="" />
+    </template>
   </div>
 </template>
 <style>

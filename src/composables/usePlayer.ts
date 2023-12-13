@@ -15,11 +15,12 @@ const {
  *
  * @param direction 按键方向
  * @param player 坐标位置
+ * @param playID 玩家ID
  * @returns void
  * @description 玩家移动事件
  */
-function movePlayer(direction: string, player: Position) {
-  if (isWall(player, direction)) return;
+function movePlayer(direction: string, player: Position, playID: number) {
+  if (isWall(player, playID, direction)) return;
 
   const newPlayer = player.map((item) => {
     return {
@@ -39,7 +40,7 @@ function movePlayer(direction: string, player: Position) {
     };
   });
 
-  if (useHaveCargo(newPlayer, getCargoPosition())) {
+  if (useHaveCargo(newPlayer, getCargoPosition(), playID)) {
     const moveCargoFunc = {
       left: moveCargoToLeft,
       right: moveCargoToRight,
@@ -47,7 +48,7 @@ function movePlayer(direction: string, player: Position) {
       down: moveCargoToDown,
     }[direction];
 
-    if (moveCargoFunc && moveCargoFunc(newPlayer)) {
+    if (moveCargoFunc && moveCargoFunc(newPlayer, playID)) {
       player.forEach((item) => {
         item.x += direction === "left" ? -1 : direction === "right" ? 1 : 0;
         item.y += direction === "up" ? -1 : direction === "down" ? 1 : 0;

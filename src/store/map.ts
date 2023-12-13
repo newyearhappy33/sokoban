@@ -27,29 +27,30 @@ export const useMapStore = defineStore("map", () => {
    * @returns Boolean
    * @description 检测是否撞墙
    */
-  function isWall(position: Position, keyDown?: String) {
-    if (position.length > 1) {
+  function isWall(position: Position, playID: number, keyDown?: String) {
+    if (playID === 1) {
+      debugger;
       switch (keyDown) {
-        case Direction.LEFT:
+        case Direction.KeyA:
           return position.some((item) => {
             return map[item.y][item.x - 1] === MapTile.WALL;
           });
-        case Direction.RIGHT:
+        case Direction.KeyD:
           return position.some((item) => {
             return map[item.y][item.x + 1] === MapTile.WALL;
           });
-        case Direction.DOWN:
+        case Direction.KeyS:
           return position.some((item) => {
             return map[item.y + 1][item.x] === MapTile.WALL;
           });
-        case Direction.TOP:
+        case Direction.KeyW:
           return position.some((item) => {
             return map[item.y - 1][item.x] === MapTile.WALL;
           });
         default:
           return false;
       }
-    } else {
+    } else if (playID === 0) {
       switch (keyDown) {
         case Direction.LEFT:
           return map[position[0].y][position[0].x - 1] === MapTile.WALL;

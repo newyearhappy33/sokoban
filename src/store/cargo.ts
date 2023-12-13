@@ -19,18 +19,18 @@ export const useCargoStore = defineStore("cargo", () => {
   /**
    * @description 箱体移动事件
    */
-  function moveCargoToLeft(pos: Position) {
-    return useCargosPosition(pos, cargos, "left");
+  function moveCargoToLeft(pos: Position, playID: number) {
+    return useCargosPosition(pos, cargos, "left", playID);
   }
 
-  function moveCargoToRight(pos: Position) {
-    return useCargosPosition(pos, cargos, "right");
+  function moveCargoToRight(pos: Position, playID: number) {
+    return useCargosPosition(pos, cargos, "right", playID);
   }
-  function moveCargoToTop(pos: Position) {
-    return useCargosPosition(pos, cargos, "top");
+  function moveCargoToTop(pos: Position, playID: number) {
+    return useCargosPosition(pos, cargos, "top", playID);
   }
-  function moveCargoToDown(pos: Position) {
-    return useCargosPosition(pos, cargos, "down");
+  function moveCargoToDown(pos: Position, playID: number) {
+    return useCargosPosition(pos, cargos, "down", playID);
   }
 
   return {
