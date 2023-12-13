@@ -1,7 +1,7 @@
 import { useMapStore } from "../store/map";
 import { useMoveCargosID, useNewPosition } from "./usePosition";
 import type { Cargo, Position } from "./usePosition";
-
+import { gameObserver } from "../composables/gameOver";
 /**
  *
  * @param pos 坐标位置
@@ -31,6 +31,8 @@ function useCargosPosition(
         // 更新箱子的位置
         item.x = newPos[0].x;
         item.y = newPos[0].y;
+
+        gameObserver.notify(); // 通知游戏结束
       }
     }
   });
