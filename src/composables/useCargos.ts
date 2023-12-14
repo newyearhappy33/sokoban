@@ -29,8 +29,8 @@ function useCargosPosition(
         return (res = false);
       } else {
         // 更新箱子的位置
-        item.x = newPos[0].x;
-        item.y = newPos[0].y;
+        item.x = newPos![0].x;
+        item.y = newPos![0].y;
 
         gameObserver.notify(); // 通知游戏结束
       }
