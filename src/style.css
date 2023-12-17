@@ -3,3 +3,10 @@ div {
   margin: 0;
   padding: 0;
 }
+div,
+span,
+button,
+li,
+input {
+  font-family: "zpix";
+}
