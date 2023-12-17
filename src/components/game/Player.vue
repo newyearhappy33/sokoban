@@ -18,8 +18,6 @@ const {
   movePlayerToLeft,
   movePlayerToRight,
 } = usePlayerStore();
-
-useMove();
 function useMove() {
   function handleKeyUp(e: KeyboardEvent) {
     if (props.id === 0) {
@@ -62,6 +60,7 @@ function useMove() {
     window.addEventListener("keyup", handleKeyUp);
   });
 }
+useMove();
 </script>
 <template>
   <div class="player" :style="position">

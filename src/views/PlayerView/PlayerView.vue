@@ -1,4 +1,21 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+enum MapStatus {
+  Home,
+  Game,
+  Draw,
+  About,
+}
+const emit = defineEmits(["onChangeView"]);
+const onClickGame = () => {
+  emit("onChangeView", MapStatus[MapStatus.Game]);
+};
+const onClickMap = () => {
+  emit("onChangeView", MapStatus[MapStatus.Draw]);
+};
+const onClickAbout = () => {
+  emit("onChangeView", MapStatus[MapStatus.About]);
+};
+</script>
 <template>
   <div class="player">
     <div class="top">
@@ -8,16 +25,30 @@
         <img src="../../assets/cargo_on_target.png" />
       </div>
     </div>
-    <button type="button" class="nes-btn is-primary game">开始游戏</button>
-    <button type="button" class="nes-btn is-success map">绘制地图</button>
-    <button type="button" class="nes-btn is-warning about">关于&</button>
+    <button
+      type="button"
+      class="nes-btn is-primary game"
+      @click="onClickGame()"
+    >
+      开始游戏
+    </button>
+    <button type="button" class="nes-btn is-success map" @click="onClickMap">
+      绘制地图
+    </button>
+    <button
+      type="button"
+      class="nes-btn is-warning about"
+      @click="onClickAbout"
+    >
+      关于&
+    </button>
   </div>
 </template>
 <style scoped lang="less">
 .player {
   display: flex;
   flex-direction: column;
-
+  width: 520px;
   .top {
     display: flex;
     flex-direction: column;

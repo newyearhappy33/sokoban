@@ -1,9 +1,8 @@
 import { useDiyMapStore } from "../../store/diyMap";
 
-const { updataMap } = useDiyMapStore();
-let source: HTMLElement | null = null;
-
 export function useDragstart(el: HTMLDivElement) {
+  const { updataMap } = useDiyMapStore();
+  let source: HTMLElement | null = null;
   if (!el) return;
 
   el.ondragstart = (e: any) => {

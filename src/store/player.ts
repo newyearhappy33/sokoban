@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { reactive } from "vue";
 import { Position } from "../composables/usePosition";
-import movePlayer from "../composables/usePlayer";
+import { movePlayer } from "../composables/usePlayer";
 
 export const usePlayerStore = defineStore("player", () => {
   const player = reactive<Position>([

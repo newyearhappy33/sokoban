@@ -2,15 +2,6 @@ import { useCargoStore } from "../store/cargo";
 import { useMapStore } from "../store/map";
 import { Position, useHaveCargo } from "./usePosition";
 
-const { isWall } = useMapStore();
-const {
-  getCargoPosition,
-  moveCargoToLeft,
-  moveCargoToRight,
-  moveCargoToDown,
-  moveCargoToTop,
-} = useCargoStore();
-
 /**
  *
  * @param direction 按键方向
@@ -19,7 +10,19 @@ const {
  * @returns void
  * @description 玩家移动事件
  */
-function movePlayer(direction: string, player: Position, playID: number) {
+export function movePlayer(
+  direction: string,
+  player: Position,
+  playID: number
+) {
+  const { isWall } = useMapStore();
+  const {
+    getCargoPosition,
+    moveCargoToLeft,
+    moveCargoToRight,
+    moveCargoToDown,
+    moveCargoToTop,
+  } = useCargoStore();
   if (isWall(player, playID, direction)) return;
 
   const newPlayer = player.map((item) => {
@@ -62,4 +65,3 @@ function movePlayer(direction: string, player: Position, playID: number) {
     item.y += direction === "up" ? -1 : direction === "down" ? 1 : 0;
   });
 }
-export default movePlayer;

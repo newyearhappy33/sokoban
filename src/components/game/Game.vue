@@ -35,5 +35,6 @@ gameObserver.subscribe(() => {
 <style scoped>
 .main {
   position: relative;
+  margin: 0 50px;
 }
 </style>
