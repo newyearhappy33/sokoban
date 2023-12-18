@@ -33,28 +33,7 @@ export const useMapStore = defineStore("map", () => {
    * @description 检测是否撞墙
    */
   function isWall(position: Position, playID: number, keyDown?: String) {
-    if (playID === 1) {
-      switch (keyDown) {
-        case Direction.KeyA:
-          return position.some((item) => {
-            return map[item.y][item.x - 1] === MapTile.WALL;
-          });
-        case Direction.KeyD:
-          return position.some((item) => {
-            return map[item.y][item.x + 1] === MapTile.WALL;
-          });
-        case Direction.KeyS:
-          return position.some((item) => {
-            return map[item.y + 1][item.x] === MapTile.WALL;
-          });
-        case Direction.KeyW:
-          return position.some((item) => {
-            return map[item.y - 1][item.x] === MapTile.WALL;
-          });
-        default:
-          return false;
-      }
-    } else if (playID === 0) {
+    if (playID === 0) {
       switch (keyDown) {
         case Direction.LEFT:
           return map[position[0].y][position[0].x - 1] === MapTile.WALL;
@@ -83,17 +62,9 @@ export const useMapStore = defineStore("map", () => {
    * @description 检测箱体前方是否有箱体
    */
   function isCargos(pos: Position, cargos: Cargo) {
-    if (pos.length > 1) {
-      return pos.some((item) => {
-        return cargos.some((cargo: any) => {
-          return cargo.x === item.x && cargo.y === item.y;
-        });
-      });
-    } else {
-      return cargos.some((item: any) => {
-        return item.x === pos[0].x && item.y === pos[0].y;
-      });
-    }
+    return cargos.some((item: any) => {
+      return item.x === pos[0].x && item.y === pos[0].y;
+    });
   }
 
   /**

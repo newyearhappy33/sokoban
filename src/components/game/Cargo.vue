@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import cargoImg from "../../assets/cargo.png";
+import cargoImg from "../../assets/img/cargo.png";
 import { usePosition } from "../../composables/usePosition";
 
 interface Props {
@@ -20,7 +20,7 @@ const { position } = usePosition([props]);
 <style scoped>
 .cargo {
   position: absolute;
-  width: 32px;
-  height: 32px;
+  width: 64px;
+  height: 64px;
 }
 </style>

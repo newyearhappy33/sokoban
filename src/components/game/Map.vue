@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import floorImg from "../../assets/floor.png";
-import target from "../../assets/target.png";
-import wall from "../../assets/wall.png";
+import floorImg from "../../assets/img/floor2.png";
+import target from "../../assets/img/end2.png";
+import wall from "../../assets/img/wall.png";
 import { useMapStore, MapTile } from "../../store/map";
 const { map } = useMapStore();
 </script>
@@ -23,7 +23,7 @@ const { map } = useMapStore();
 <style scoped>
 .flex {
   display: flex;
-  width: 32px;
-  height: 32px;
+  width: 64px;
+  height: 64px;
 }
 </style>

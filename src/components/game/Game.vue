@@ -10,8 +10,9 @@ import { gameObserver } from "../../composables/gameOver";
 const { map, cargosToEnd } = useMapStore();
 const { cargos } = useCargoStore();
 const { player } = usePlayerStore();
-const mapWidth = computed(() => map[0].length * 32 + "px");
+const mapWidth = computed(() => map[0].length * 64 + "px");
 
+// 通过订阅游戏结束的事件，来判断游戏是否结束
 gameObserver.subscribe(() => {
   if (cargosToEnd(cargos)) {
     setTimeout(() => {
@@ -36,5 +37,7 @@ gameObserver.subscribe(() => {
 .main {
   position: relative;
   margin: 0 50px;
+  overflow: hidden;
+  border-radius: 10px;
 }
 </style>

@@ -13,23 +13,14 @@ interface Cargos {
 }
 export type Cargo = Cargos[];
 
-const STEP = 32;
+const STEP = 64;
 // 获取到玩家的位置
 export function usePosition(pos: Position) {
   const position = computed(() => {
-    if (pos.length > 1) {
-      return pos.map((item) => {
-        return {
-          left: item.x * STEP + "px",
-          top: item.y * STEP + "px",
-        };
-      });
-    } else {
-      return {
-        left: pos[0].x * STEP + "px",
-        top: pos[0].y * STEP + "px",
-      };
-    }
+    return {
+      left: pos[0].x * STEP + "px",
+      top: pos[0].y * STEP + "px",
+    };
   });
   return { position };
 }
@@ -38,7 +29,6 @@ export function usePosition(pos: Position) {
  *
  * @param player 坐标位置
  * @param cargo  箱体
- * @param playID 玩家ID
  * @returns Boolean
  * @description 判断玩家移动的方向是否有箱子
  */
@@ -47,14 +37,7 @@ export function useHaveCargo(
   cargo: any,
   playID: number
 ): boolean {
-  if (playID === 1) {
-    return cargo.some((item: any) => {
-      return (
-        item.x * STEP === player[0].x * STEP &&
-        item.y * STEP === player[0].y * STEP
-      );
-    });
-  } else if (playID === 0) {
+  if (playID === 0) {
     return cargo.some((item: any) => {
       return (
         item.x * STEP === player[0].x * STEP &&
@@ -68,13 +51,9 @@ export function useHaveCargo(
 /**
  * @description 获取到要推动箱子的ID
  */
-export function useMoveCargosID(pos: Position, cargos: Cargo, playID: number) {
+export function useMoveCargosID(pos: Position, cargos: Cargo) {
   for (const data of cargos) {
-    if (playID === 1) {
-      if (data.x === pos[0].x && data.y === pos[0].y) {
-        return data.id;
-      }
-    } else if (data.x === pos[0].x && data.y === pos[0].y) {
+    if (data.x === pos[0].x && data.y === pos[0].y) {
       return data.id;
     }
   }
@@ -86,10 +65,6 @@ export enum Direction {
   RIGHT = "right",
   TOP = "up",
   DOWN = "down",
-  KeyA = "left",
-  KeyD = "right",
-  KeyW = "up",
-  KeyS = "down",
 }
 
 /**
@@ -104,20 +79,7 @@ export function useNewPosition(
   direction: string,
   playID: number
 ) {
-  if (playID === 1) {
-    switch (direction) {
-      case Direction.KeyA:
-        return [{ ...pos[0], x: pos[0].x - 1, y: pos[0].y }];
-      case Direction.KeyD:
-        return [{ ...pos[0], x: pos[0].x + 1, y: pos[0].y }];
-      case Direction.KeyW:
-        return [{ ...pos[0], x: pos[0].x, y: pos[0].y - 1 }];
-      case Direction.KeyS:
-        return [{ ...pos[0], x: pos[0].x, y: pos[0].y + 1 }];
-      default:
-        return pos;
-    }
-  } else if (playID === 0) {
+  if (playID === 0) {
     switch (direction) {
       case Direction.LEFT:
         return [{ ...pos[0], x: pos[0].x - 1, y: pos[0].y }];

@@ -10,11 +10,6 @@ export const usePlayerStore = defineStore("player", () => {
       x: 1,
       y: 1,
     },
-    {
-      id: 1,
-      x: 1,
-      y: 2,
-    },
   ]);
 
   /**

@@ -1,7 +1,14 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted } from "vue";
-import Player from "../../assets/keeper.png";
-import Player1 from "../../assets/keeper1.png";
+import PlayerToRight from "../../assets/img/right.png";
+import PlayerToRightMove from "../../assets/img/right-move.png";
+import PlayerToLeft from "../../assets/img/left.png";
+import PlayerToLeftMove from "../../assets/img/left-move.png";
+import PlayerToUp from "../../assets/img/top.png";
+import PlayerToUpMove from "../../assets/img/top-move.png";
+import PlayerToDown from "../../assets/img/down.png";
+import PlayerToDownMove from "../../assets/img/down-move.png";
+
+import { onMounted, onUnmounted, ref } from "vue";
 import { usePlayerStore } from "../../store/player";
 import { usePosition } from "../../composables/usePosition";
 
@@ -18,6 +25,10 @@ const {
   movePlayerToLeft,
   movePlayerToRight,
 } = usePlayerStore();
+
+const currentPlayerImage = ref(PlayerToRight);
+const defaultPlayerImage = ref(PlayerToRight);
+const status = ref<boolean>(false);
 function useMove() {
   function handleKeyUp(e: KeyboardEvent) {
     if (props.id === 0) {
@@ -35,24 +46,8 @@ function useMove() {
           movePlayerToDown(props.id);
           break;
       }
-    } else if (props.id === 1) {
-      switch (e.code) {
-        case "KeyA":
-          movePlayerToLeft(props.id);
-          break;
-        case "KeyD":
-          movePlayerToRight(props.id);
-          break;
-        case "KeyW":
-          movePlayerToUp(props.id);
-          break;
-        case "KeyS":
-          movePlayerToDown(props.id);
-          break;
-      }
     }
   }
-
   onMounted(() => {
     window.addEventListener("keyup", handleKeyUp);
   });
@@ -60,22 +55,23 @@ function useMove() {
     window.addEventListener("keyup", handleKeyUp);
   });
 }
+
 useMove();
 </script>
 <template>
   <div class="player" :style="position">
     <template v-if="props.id === 0">
-      <img :src="Player" class="" />
-    </template>
-    <template v-if="props.id === 1">
-      <img :src="Player1" class="" />
+      <img :src="currentPlayerImage" />
     </template>
   </div>
 </template>
-<style>
+<style scoped lang="less">
 .player {
   position: absolute;
   width: 32px;
   height: 32px;
+  img {
+    image-rendering: pixelated;
+  }
 }
 </style>

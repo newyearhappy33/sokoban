@@ -17,7 +17,7 @@ function useCargosPosition(
   playID: number
 ): boolean {
   const { isCargos, cargoIntoWall } = useMapStore();
-  const id = useMoveCargosID(pos, cargos, playID); // 获取到要推动箱子的ID
+  const id = useMoveCargosID(pos, cargos); // 获取到要推动箱子的ID
 
   let res = true;
 
