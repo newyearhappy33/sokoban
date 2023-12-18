@@ -29,10 +29,18 @@ const clickOnSave = () => {
       </div>
     </div>
     <MapUtils />
-    <button @click="clickOnSave">clickOnSave</button>
+    <div class="nes-container is-dark with-title warning">
+      <p class="title">warning</p>
+      <p>· 绘制地图的时，四周必须为墙面</p>
+      <p>· 绘制地图的时，请绘制'正常'类地图</p>
+    </div>
+
+    <button type="button" class="nes-btn saveClick" @click="clickOnSave">
+      保存地图
+    </button>
   </div>
 </template>
-<style scoped>
+<style scoped lang="less">
 .flex {
   display: flex;
 }
@@ -44,5 +52,11 @@ const clickOnSave = () => {
 }
 .dragover {
   background-color: #f0e3b7;
+}
+
+.saveClick {
+}
+.warning {
+  margin-top: 20px !important;
 }
 </style>
