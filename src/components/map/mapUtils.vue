@@ -16,33 +16,33 @@
   margin-top: 15px;
 }
 .wall {
-  width: 60px;
-  height: 60px;
-  background: url(../../assets/wall.png);
+  width: 64px;
+  height: 64px;
+  background: url(../../assets/img/wall.png);
   background-size: contain;
   border-radius: 5px;
   overflow: hidden;
 }
 .cargo {
-  width: 60px;
-  height: 60px;
-  background: url(../../assets/cargo.png);
+  width: 64px;
+  height: 64px;
+  background: url(../../assets/img/cargo.png);
   background-size: contain;
   border-radius: 5px;
   overflow: hidden;
 }
 .floor {
-  width: 60px;
-  height: 60px;
-  background: url(../../assets/floor.png);
+  width: 64px;
+  height: 64px;
+  background: url(../../assets/img/floor2.png);
   background-size: contain;
   border-radius: 5px;
   overflow: hidden;
 }
 .end {
-  width: 60px;
-  height: 60px;
-  background: url(../../assets/target.png);
+  width: 64px;
+  height: 64px;
+  background: url(../../assets/img/end2.png);
   background-size: contain;
   border-radius: 5px;
   overflow: hidden;

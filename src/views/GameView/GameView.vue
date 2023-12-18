@@ -4,8 +4,9 @@ import Game from "../../components/game/Game.vue";
 <template>
   <div class="game">
     <div class="score">
-      <span class="nes-text is-warning">Warning:100分</span>
-      <span class="nes-text is-success">Warning:100分</span>
+      <span class="nes-text is-success" style="font-size: 30px"
+        >Warning:100分</span
+      >
     </div>
     <Game />
     <i class="nes-icon close goBack"></i>
