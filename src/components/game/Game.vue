@@ -39,5 +39,6 @@ gameObserver.subscribe(() => {
   margin: 0 50px;
   overflow: hidden;
   border-radius: 10px;
+  box-shadow: 0px 0px 20px 9px #c4c4c4;
 }
 </style>

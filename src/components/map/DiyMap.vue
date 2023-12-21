@@ -23,9 +23,11 @@ const clickOnSave = () => {
 </script>
 <template>
   <div ref="container" class="diymap">
-    <div v-for="(row, i) in mapConfig" :key="i" class="flex">
-      <div v-for="(cell, j) in row" :key="j">
-        <div data-drop="copy" class="cell" :data-id="cell"></div>
+    <div class="map">
+      <div v-for="(row, i) in mapConfig" :key="i" class="flex">
+        <div v-for="(cell, j) in row" :key="j">
+          <div data-drop="copy" class="cell" :data-id="cell"></div>
+        </div>
       </div>
     </div>
     <MapUtils />
@@ -56,7 +58,9 @@ const clickOnSave = () => {
 .diymap {
   position: relative;
 }
-
+.map {
+  box-shadow: 1px 1px 15px 0px #8e8e8ea3;
+}
 .saveClick {
   position: absolute;
   right: 0;

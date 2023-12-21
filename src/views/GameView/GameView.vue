@@ -9,9 +9,11 @@ const onClickBack = () => {
 <template>
   <div class="game">
     <div class="score">
-      <span class="nes-text is-success" style="font-size: 30px"
-        >Warning:100分</span
-      >
+      <i class="nes-icon coin is-large species"></i>
+      <div class="count">
+        <i class="nes-icon close is-small"></i>
+        <span>0</span>
+      </div>
     </div>
     <Game />
     <i class="nes-icon close goBack" @click="onClickBack"></i>
@@ -33,11 +35,20 @@ const onClickBack = () => {
   position: absolute;
   top: 1rem;
   left: 2rem;
-  span {
-    width: 100%;
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
+  .count {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    i {
+      margin-right: 10px;
+    }
+    span {
+      font-size: 30px;
+      font-weight: 900;
+    }
+  }
+  .species {
+    // animation: species 1s infinite alternate;
   }
 }
 .goBack {
@@ -46,5 +57,14 @@ const onClickBack = () => {
   top: 1rem;
   right: 2rem;
   cursor: pointer;
+}
+
+@keyframes species {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>

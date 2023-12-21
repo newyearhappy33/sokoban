@@ -36,6 +36,7 @@
   background-size: contain;
   border-radius: 5px;
   overflow: hidden;
+  box-shadow: 1px 1px 15px 0px #8e8e8ea3;
 }
 .cargo {
   width: 64px;
@@ -44,6 +45,7 @@
   background-size: contain;
   border-radius: 5px;
   overflow: hidden;
+  box-shadow: 1px 1px 15px 0px #8e8e8ea3;
 }
 .floor {
   width: 64px;
@@ -52,6 +54,7 @@
   background-size: contain;
   border-radius: 5px;
   overflow: hidden;
+  box-shadow: 1px 1px 15px 0px #8e8e8ea3;
 }
 .end {
   width: 64px;
@@ -60,6 +63,7 @@
   background-size: contain;
   border-radius: 5px;
   overflow: hidden;
+  box-shadow: 1px 1px 15px 0px #8e8e8ea3;
 }
 
 .text {
