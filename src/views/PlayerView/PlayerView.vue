@@ -2,6 +2,7 @@
 import router from "../../router/router";
 
 const onClickButton = (e: MouseEvent) => {
+  e.preventDefault();
   if (e.target instanceof HTMLElement) {
     const target = e.target.innerText;
     switch (target) {
