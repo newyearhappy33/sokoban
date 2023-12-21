@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { watch } from "vue";
 import Game from "../../components/game/Game.vue";
 import router from "../../router/router";
 import { useCount } from "../../store/count";
@@ -6,12 +7,26 @@ import { useCount } from "../../store/count";
 const onClickBack = () => {
   router.push({ name: "Player" });
 };
+
 const { count } = useCount();
+let countEl: HTMLElement | null = null;
+watch(
+  () => useCount().count,
+  (newVal) => {
+    if (newVal && countEl) {
+      countEl.classList.add("species");
+
+      setTimeout(() => {
+        countEl!.classList.remove("species");
+      }, 1000);
+    }
+  }
+);
 </script>
 <template>
   <div class="game">
     <div class="score">
-      <i class="nes-icon coin is-large species"></i>
+      <i class="nes-icon coin is-large species" ref="countEl"></i>
       <div class="count">
         <i class="nes-icon close is-small"></i>
         <span>{{ count }}</span>
@@ -50,7 +65,7 @@ const { count } = useCount();
     }
   }
   .species {
-    // animation: species 1s infinite alternate;
+    animation: species 0.5s ease;
   }
 }
 .goBack {
@@ -62,11 +77,11 @@ const { count } = useCount();
 }
 
 @keyframes species {
-  0% {
-    transform: rotate(0deg);
+  from {
+    transform: scale(1);
   }
-  100% {
-    transform: rotate(360deg);
+  to {
+    transform: scale(1.2);
   }
 }
 </style>
