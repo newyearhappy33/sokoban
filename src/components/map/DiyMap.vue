@@ -13,16 +13,16 @@ onMounted(() => {
 
 const clickOnSave = () => {
   if (!isSpecialArray()) {
-    console.log("地图四周必须是墙壁！");
+    alert("地图不符合规范，请检查！");
     return;
   } else {
     saveMap();
-    console.log("保存成功！");
+    alert("保存成功！");
   }
 };
 </script>
 <template>
-  <div ref="container">
+  <div ref="container" class="diymap">
     <div v-for="(row, i) in mapConfig" :key="i" class="flex">
       <div v-for="(cell, j) in row" :key="j">
         <div data-drop="copy" class="cell" :data-id="cell"></div>
@@ -30,11 +30,11 @@ const clickOnSave = () => {
     </div>
     <MapUtils />
     <div class="nes-container is-dark with-title warning">
-      <p class="title">warning</p>
+      <p class="title">Warning</p>
+      <p>· 点击地图类型拖动到你要放置的位置中即可绘制地图</p>
       <p>· 绘制地图的时，四周必须为墙面</p>
       <p>· 绘制地图的时，请绘制'正常'类地图</p>
     </div>
-
     <button type="button" class="nes-btn saveClick" @click="clickOnSave">
       保存地图
     </button>
@@ -46,16 +46,24 @@ const clickOnSave = () => {
 }
 .cell {
   border: 1px solid black;
-  width: 60px;
-  height: 60px;
+  width: 66px;
+  height: 66px;
   background-color: #ebebeb;
 }
 .dragover {
   background-color: #f0e3b7;
 }
+.diymap {
+  position: relative;
+}
 
 .saveClick {
+  position: absolute;
+  right: 0;
+  margin-top: 20px;
+  width: 100%;
 }
+
 .warning {
   margin-top: 20px !important;
 }

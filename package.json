@@ -12,7 +12,8 @@
     "less": "^4.2.0",
     "nes.css": "^2.3.0",
     "pinia": "^2.1.7",
-    "vue": "^3.3.8"
+    "vue": "^3.3.8",
+    "vue-router": "^4.2.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.0",

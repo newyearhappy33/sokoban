@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import Game from "../../components/game/Game.vue";
+import router from "../../router/router";
+
+const onClickBack = () => {
+  router.push({ name: "Player" });
+};
 </script>
 <template>
   <div class="game">
@@ -9,7 +14,7 @@ import Game from "../../components/game/Game.vue";
       >
     </div>
     <Game />
-    <i class="nes-icon close goBack"></i>
+    <i class="nes-icon close goBack" @click="onClickBack"></i>
   </div>
 </template>
 <style scoped lang="less">

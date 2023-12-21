@@ -1,19 +1,26 @@
 <script setup lang="ts">
-enum MapStatus {
-  Home,
-  Game,
-  Draw,
-  About,
-}
-const emit = defineEmits(["onChangeView"]);
-const onClickGame = () => {
-  emit("onChangeView", MapStatus[MapStatus.Game]);
+import router from "../../router/router";
+
+const onClickButton = (e: MouseEvent) => {
+  if (e.target instanceof HTMLElement) {
+    const target = e.target.innerText;
+    switch (target) {
+      case "开始游戏":
+        updateView("Game");
+        break;
+      case "绘制地图":
+        updateView("Draw");
+        break;
+      case "关于&":
+        updateView("About");
+        break;
+      default:
+        break;
+    }
+  }
 };
-const onClickMap = () => {
-  emit("onChangeView", MapStatus[MapStatus.Draw]);
-};
-const onClickAbout = () => {
-  emit("onChangeView", MapStatus[MapStatus.About]);
+const updateView = (view: "Game" | "Draw" | "About") => {
+  router.push({ name: view });
 };
 </script>
 <template>
@@ -28,17 +35,17 @@ const onClickAbout = () => {
     <button
       type="button"
       class="nes-btn is-primary game"
-      @click="onClickGame()"
+      @click="onClickButton"
     >
       开始游戏
     </button>
-    <button type="button" class="nes-btn is-success map" @click="onClickMap">
+    <button type="button" class="nes-btn is-success map" @click="onClickButton">
       绘制地图
     </button>
     <button
       type="button"
       class="nes-btn is-warning about"
-      @click="onClickAbout"
+      @click="onClickButton"
     >
       关于&
     </button>
