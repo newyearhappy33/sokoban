@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import Game from "../../components/game/Game.vue";
 import router from "../../router/router";
+import { useCount } from "../../store/count";
 
 const onClickBack = () => {
   router.push({ name: "Player" });
 };
+const { count } = useCount();
 </script>
 <template>
   <div class="game">
@@ -12,7 +14,7 @@ const onClickBack = () => {
       <i class="nes-icon coin is-large species"></i>
       <div class="count">
         <i class="nes-icon close is-small"></i>
-        <span>0</span>
+        <span>{{ count }}</span>
       </div>
     </div>
     <Game />

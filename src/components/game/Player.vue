@@ -110,8 +110,10 @@ useMove();
 <style scoped lang="less">
 .player {
   position: absolute;
-  width: 32px;
-  height: 32px;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  justify-content: center;
   img {
     image-rendering: pixelated;
   }

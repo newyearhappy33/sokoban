@@ -1,20 +1,24 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import Map from "./Map.vue";
 import Player from "./Player.vue";
 import Cargo from "./Cargo.vue";
 import { useCargoStore } from "../../store/cargo";
 import { useMapStore } from "../../store/map";
-import { computed } from "vue";
 import { usePlayerStore } from "../../store/player";
+import { useCount } from "../../store/count";
 import { gameObserver } from "../../composables/gameOver";
+
 const { map, cargosToEnd } = useMapStore();
 const { cargos } = useCargoStore();
 const { player } = usePlayerStore();
+const { updataCount } = useCount();
 const mapWidth = computed(() => map[0].length * 64 + "px");
 
 // 通过订阅游戏结束的事件，来判断游戏是否结束
 gameObserver.subscribe(() => {
   if (cargosToEnd(cargos)) {
+    updataCount();
     setTimeout(() => {
       alert("Game Over");
       location.reload();
