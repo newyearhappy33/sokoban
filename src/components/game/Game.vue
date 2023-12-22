@@ -9,8 +9,8 @@ import { usePlayerStore } from "../../store/player";
 import { useCount } from "../../store/count";
 import { gameObserver } from "../../composables/gameOver";
 
-const { map, cargosToEnd } = useMapStore();
-const { cargos } = useCargoStore();
+const { map, cargosToEnd, updateMapLevel } = useMapStore();
+const { cargos, updateCargoLevel } = useCargoStore();
 const { player } = usePlayerStore();
 const { updataCount } = useCount();
 const mapWidth = computed(() => map[0].length * 64 + "px");
@@ -22,6 +22,8 @@ gameObserver.subscribe(() => {
     setTimeout(() => {
       alert("Game Over");
       location.reload();
+      updateMapLevel();
+      updateCargoLevel();
     }, 500);
   }
 });

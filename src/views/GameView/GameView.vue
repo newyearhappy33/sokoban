@@ -65,7 +65,7 @@ watch(
     }
   }
   .species {
-    animation: species 0.5s ease;
+    animation: rotate3d 3s linear infinite;
   }
 }
 .goBack {
@@ -77,11 +77,12 @@ watch(
 }
 
 @keyframes species {
-  from {
-    transform: scale(1);
+  0% {
+    transform: translateY(0);
   }
-  to {
-    transform: scale(1.2);
+
+  100% {
+    transform: translateY(10px);
   }
 }
 </style>
