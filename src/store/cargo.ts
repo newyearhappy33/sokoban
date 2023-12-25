@@ -8,31 +8,12 @@ export const useCargoStore = defineStore("cargo", () => {
     { id: 2, x: 3, y: 3 },
   ]);
 
-  const nextCargos = {
-    level2: [
-      { id: 1, x: 4, y: 3 },
-      { id: 2, x: 3, y: 4 },
-    ],
-    level3: [
-      { id: 1, x: 3, y: 7 },
-      { id: 2, x: 7, y: 6 },
-    ],
-    level4: [
-      { id: 1, x: 6, y: 4 },
-      { id: 2, x: 4, y: 6 },
-    ],
-  };
-
   function setupCargos(newCargos: Cargo) {
     cargos.splice(0, cargos.length, ...newCargos);
   }
 
   function getCargoPosition() {
     return cargos;
-  }
-
-  function updateCargoLevel() {
-    cargos.splice(0, cargos.length, ...nextCargos.level2);
   }
 
   /**
@@ -60,6 +41,5 @@ export const useCargoStore = defineStore("cargo", () => {
     moveCargoToRight,
     moveCargoToTop,
     moveCargoToDown,
-    updateCargoLevel,
   };
 });

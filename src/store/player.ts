@@ -12,6 +12,14 @@ export const usePlayerStore = defineStore("player", () => {
     },
   ]);
 
+  // 初始化玩家位置
+  function initPlayer() {
+    player.map((item) => {
+      item.x = 1;
+      item.y = 1;
+    });
+  }
+
   /**
    *  @description 玩家移动事件
    */
@@ -42,5 +50,6 @@ export const usePlayerStore = defineStore("player", () => {
     movePlayerToDown,
     movePlayerToUp,
     getPlayerPosition,
+    initPlayer,
   };
 });

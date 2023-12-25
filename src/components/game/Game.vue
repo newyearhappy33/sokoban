@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import Map from "./Map.vue";
 import Player from "./Player.vue";
 import Cargo from "./Cargo.vue";
@@ -9,21 +9,25 @@ import { usePlayerStore } from "../../store/player";
 import { useCount } from "../../store/count";
 import { gameObserver } from "../../composables/gameOver";
 
-const { map, cargosToEnd, updateMapLevel } = useMapStore();
-const { cargos, updateCargoLevel } = useCargoStore();
-const { player } = usePlayerStore();
+const { map, cargosToEnd } = useMapStore();
+const { cargos } = useCargoStore();
+const { player, initPlayer } = usePlayerStore();
 const { updataCount } = useCount();
 const mapWidth = computed(() => map[0].length * 64 + "px");
+
+const status = ref<boolean>(false);
+
+const onNextGame = () => {
+  status.value = false;
+  initPlayer();
+};
 
 // 通过订阅游戏结束的事件，来判断游戏是否结束
 gameObserver.subscribe(() => {
   if (cargosToEnd(cargos)) {
     updataCount();
     setTimeout(() => {
-      alert("Game Over");
-      location.reload();
-      updateMapLevel();
-      updateCargoLevel();
+      status.value = true;
     }, 500);
   }
 });
@@ -38,6 +42,7 @@ gameObserver.subscribe(() => {
       <Cargo :id="cargo.id" :x="cargo.x" :y="cargo.y" />
     </template>
   </div>
+  <button v-if="status" @click="onNextGame">下一关</button>
 </template>
 <style scoped>
 .main {

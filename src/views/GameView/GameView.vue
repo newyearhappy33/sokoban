@@ -63,9 +63,6 @@ watch(
       font-weight: 900;
     }
   }
-  .species {
-    animation: species 3s linear infinite;
-  }
 }
 .goBack {
   margin-left: 50px;
