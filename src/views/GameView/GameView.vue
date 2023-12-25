@@ -15,7 +15,6 @@ watch(
   (newVal) => {
     if (newVal && countEl) {
       countEl.classList.add("species");
-
       setTimeout(() => {
         countEl!.classList.remove("species");
       }, 1000);
@@ -65,7 +64,7 @@ watch(
     }
   }
   .species {
-    animation: rotate3d 3s linear infinite;
+    animation: species 3s linear infinite;
   }
 }
 .goBack {
@@ -82,7 +81,7 @@ watch(
   }
 
   100% {
-    transform: translateY(10px);
+    transform: translateY(-10px);
   }
 }
 </style>
