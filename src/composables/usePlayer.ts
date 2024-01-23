@@ -43,6 +43,7 @@ export function movePlayer(
     };
   });
 
+  // 判断箱体是否存在
   if (useHaveCargo(newPlayer, getCargoPosition(), playID)) {
     const moveCargoFunc = {
       left: moveCargoToLeft,
@@ -51,6 +52,7 @@ export function movePlayer(
       down: moveCargoToDown,
     }[direction];
 
+    // moveCargoFunc有效并且箱体移动成功时，修改人物坐标
     if (moveCargoFunc && moveCargoFunc(newPlayer, playID)) {
       player.forEach((item) => {
         item.x += direction === "left" ? -1 : direction === "right" ? 1 : 0;

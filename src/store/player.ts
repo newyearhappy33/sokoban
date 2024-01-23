@@ -23,20 +23,8 @@ export const usePlayerStore = defineStore("player", () => {
   /**
    *  @description 玩家移动事件
    */
-  function movePlayerToLeft(id: number) {
-    movePlayer("left", [player[id]], id);
-  }
-
-  function movePlayerToRight(id: number) {
-    movePlayer("right", [player[id]], id);
-  }
-
-  function movePlayerToDown(id: number) {
-    movePlayer("down", [player[id]], id);
-  }
-
-  function movePlayerToUp(id: number) {
-    movePlayer("up", [player[id]], id);
+  function movePlayerTo(key: string, id: number) {
+    movePlayer(key, [player[id]], id);
   }
 
   function getPlayerPosition() {
@@ -45,10 +33,7 @@ export const usePlayerStore = defineStore("player", () => {
 
   return {
     player,
-    movePlayerToLeft,
-    movePlayerToRight,
-    movePlayerToDown,
-    movePlayerToUp,
+    movePlayerTo,
     getPlayerPosition,
     initPlayer,
   };

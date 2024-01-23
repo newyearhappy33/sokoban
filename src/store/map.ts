@@ -20,10 +20,26 @@ export const useMapStore = defineStore("map", () => {
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
   ];
 
+  function initMap() {
+    map.splice(0, map.length);
+    map.push(
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+      [1, 2, 2, 2, 2, 2, 1, 2, 2, 1],
+      [1, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+      [1, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+      [1, 2, 2, 1, 1, 2, 2, 2, 2, 1],
+      [1, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+      [1, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+      [1, 2, 2, 2, 2, 2, 3, 3, 2, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    );
+  }
+
   /**
    *
-   * @param position 坐标位置
-   * @param keyDown 键盘按键
+   * @param {position} 坐标位置
+   * @param {keyDown} 键盘按键
    * @returns Boolean
    * @description 检测是否撞墙
    */
@@ -63,7 +79,6 @@ export const useMapStore = defineStore("map", () => {
   }
 
   /**
-   *
    * @description 判断箱子是否全部到达目的地
    */
   function cargosToEnd(cargos: Cargo) {
@@ -75,6 +90,7 @@ export const useMapStore = defineStore("map", () => {
   return {
     map,
     isWall,
+    initMap,
     isCargos,
     cargoIntoWall,
     cargosToEnd,

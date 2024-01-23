@@ -1,13 +1,23 @@
 <script setup lang="ts">
 import router from "../../router/router";
+import { useCargoStore } from "../../store/cargo";
+import { useMapStore } from "../../store/map";
+import { usePlayerStore } from "../../store/player";
 
 const onClickButton = (e: MouseEvent) => {
   e.preventDefault();
+  const {initCargo} = useCargoStore()
+  const {initPlayer} = usePlayerStore()
+  const {initMap} = useMapStore()
   if (e.target instanceof HTMLElement) {
     const target = e.target.innerText;
     switch (target) {
       case "开始游戏":
         updateView("Game");
+        initMap()
+        initCargo()
+        initPlayer()
+        localStorage.removeItem("count")
         break;
       case "绘制地图":
         updateView("Draw");

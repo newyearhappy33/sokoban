@@ -19,12 +19,7 @@ interface Props {
 }
 const props = defineProps<Props>();
 const { position } = usePosition([props]);
-const {
-  movePlayerToUp,
-  movePlayerToDown,
-  movePlayerToLeft,
-  movePlayerToRight,
-} = usePlayerStore();
+const { movePlayerTo } = usePlayerStore();
 
 const currentPlayerImage = ref(PlayerToRight);
 const defaultPlayerImage = ref(PlayerToRight);
@@ -34,17 +29,16 @@ function useMove() {
     if (props.id === 0) {
       switch (e.code) {
         case "ArrowLeft":
-          movePlayerToLeft(props.id);
+          movePlayerTo("left", props.id);
           break;
         case "ArrowRight":
-          movePlayerToRight(props.id);
-          handleKeyDown(e);
+          movePlayerTo("right", props.id);
           break;
         case "ArrowUp":
-          movePlayerToUp(props.id);
+          movePlayerTo("up", props.id);
           break;
         case "ArrowDown":
-          movePlayerToDown(props.id);
+          movePlayerTo("down", props.id);
           break;
       }
       isKeyDown.value = false;
@@ -52,6 +46,7 @@ function useMove() {
     }
   }
 
+  // 通过按键方向修改图片源
   function handleKeyDown(e: KeyboardEvent) {
     if (props.id === 0 && !isKeyDown.value) {
       isKeyDown.value = true;

@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
+// 积分
 export const useCount = defineStore("counts", () => {
   let count = ref<number>(Number(localStorage.getItem("count")) || 0);
 

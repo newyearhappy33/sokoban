@@ -8,8 +8,9 @@ export const useCargoStore = defineStore("cargo", () => {
     { id: 2, x: 3, y: 3 },
   ]);
 
-  function setupCargos(newCargos: Cargo) {
-    cargos.splice(0, cargos.length, ...newCargos);
+  function initCargo() {
+    cargos.splice(0, cargos.length);
+    cargos.push({ id: 1, x: 2, y: 2 }, { id: 2, x: 3, y: 3 });
   }
 
   function getCargoPosition() {
@@ -26,16 +27,18 @@ export const useCargoStore = defineStore("cargo", () => {
   function moveCargoToRight(pos: Position, playID: number) {
     return useCargosPosition(pos, cargos, "right", playID);
   }
+
   function moveCargoToTop(pos: Position, playID: number) {
     return useCargosPosition(pos, cargos, "up", playID);
   }
+
   function moveCargoToDown(pos: Position, playID: number) {
     return useCargosPosition(pos, cargos, "down", playID);
   }
 
   return {
     cargos,
-    setupCargos,
+    initCargo,
     getCargoPosition,
     moveCargoToLeft,
     moveCargoToRight,
