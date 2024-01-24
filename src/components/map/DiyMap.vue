@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import MapUtils from "./mapUtils.vue";
-import { useDiyMapStore } from "../../store/diyMap";
 import { onMounted } from "vue";
+import router from "../../router/router";
+import MapUtils from "./mapUtils.vue";
+import {useMapStore} from "../../store/map"
 import { useDragstart } from "./DiyMap";
+import { useDiyMapStore } from "../../store/diyMap";
 const { mapConfig, saveMap, isSpecialArray } = useDiyMapStore();
 
 let container: HTMLElement | null = null;
@@ -17,9 +19,14 @@ const clickOnSave = () => {
     return;
   } else {
     saveMap();
-    alert("保存成功！");
+    confirm("地图绘制成功，是否立即开始游戏？") ? goDiyMapGame() : console.log('false');
   }
 };
+const {setDiyMap}  = useMapStore()
+function goDiyMapGame(){
+  setDiyMap()
+  router.push({ name: "Game" });
+}
 </script>
 <template>
   <div ref="container" class="diymap">
@@ -50,7 +57,7 @@ const clickOnSave = () => {
   border: 1px solid black;
   width: 66px;
   height: 66px;
-  background-color: #ebebeb;
+  background:url(../../assets/img/floor2.png);
 }
 .dragover {
   background-color: #f0e3b7;

@@ -87,12 +87,27 @@ export const useMapStore = defineStore("map", () => {
     });
   }
 
+  function setDiyMap() {
+    const mapConfig = JSON.parse(localStorage.getItem("map") as string);
+    if (!mapConfig) return alert("地图加载异常!");
+    if (!Array.isArray(mapConfig)) return alert("地图加载异常!");
+
+    const mapArray = mapConfig.map((subArray) => {
+      return subArray.map((item: number) => {
+        // 检查每个元素，如果大于3，则设置为2，否则保持原值
+        return item > 3 ? 2 : item;
+      });
+    });
+    map.splice(0, map.length, ...mapArray); // 清空数组并添加新的元素
+  }
+
   return {
     map,
     isWall,
     initMap,
     isCargos,
-    cargoIntoWall,
+    setDiyMap,
     cargosToEnd,
+    cargoIntoWall,
   };
 });

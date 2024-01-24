@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import router from "../../router/router";
-import { useCargoStore } from "../../store/cargo";
 import { useMapStore } from "../../store/map";
+import { useCargoStore } from "../../store/cargo";
 import { usePlayerStore } from "../../store/player";
 
 const onClickButton = (e: MouseEvent) => {
