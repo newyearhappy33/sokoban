@@ -5,16 +5,20 @@ export function useDragstart(el: HTMLDivElement) {
   let source: HTMLElement | null = null;
   if (!el) return;
 
+  // 拖动时处罚
   el.ondragstart = (e: any) => {
     e.dataTransfer!.effectAllowed = e.target.dataset.effect;
     source = e.target as HTMLElement;
   };
 
+  // 拖动结束时触发
   el.ondragover = (e: DragEvent) => {
     e.preventDefault();
   };
 
+  // 当元素或选中的文本在可释放目标上被释放时触发
   el.ondrop = (e: DragEvent) => {
+    // 被拖动元素
     const dropNode = getDropNode(e.target as HTMLElement);
 
     if (dropNode && dropNode.dataset.drop === e.dataTransfer!.effectAllowed) {
@@ -34,6 +38,7 @@ export function useDragstart(el: HTMLDivElement) {
   };
 }
 
+// 获取拖动元素
 function getDropNode(e: HTMLElement | null): HTMLElement | null {
   while (e) {
     if (e.dataset && e.dataset.drop) {
